@@ -62,7 +62,7 @@ const ProfileSchema = z.object({
   shortIntro: z.string(),
   bio: z.array(z.string()),
   focusAreas: z.array(z.string()),
-  interests: z.array(z.object({ label: z.string(), note: z.string().optional(), icon: z.string().optional() })),
+  interests: z.array(z.object({ label: z.string(), note: z.string().optional(), icon: z.string().optional(), href: z.string().optional(), linkLabel: z.string().optional() })),
   languages: z.array(
     z.object({
       name: z.string(), native: z.string(), dir: z.enum(["ltr", "rtl"]).optional(),
@@ -290,3 +290,11 @@ export type Collection = z.infer<typeof CollectionSchema>;
 export const getPhotos = () => readJson("photography/photos.json", z.object({ photos: z.array(PhotoSchema) })).photos;
 export const getCollections = () =>
   readJson("photography/collections.json", z.object({ collections: z.array(CollectionSchema) })).collections;
+
+/* --------------------------------------------- personal interests ("my takes on…") */
+
+const InterestPageSchema = z.object({ title: z.string(), icon: z.string().optional(), lede: z.string().optional() });
+export type InterestPage = z.infer<typeof InterestPageSchema> & { slug: string; body: string };
+export const getInterestPages = (): InterestPage[] =>
+  readMdxDir("interests", InterestPageSchema).map((e) => ({ ...e.data, slug: e.slug, body: e.body }));
+export const getInterestPage = (slug: string) => getInterestPages().find((p) => p.slug === slug);

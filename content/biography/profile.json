@@ -27,52 +27,72 @@
     {
       "label": "Diplomacy & International Relations",
       "note": "I am fascinated by the invisible architecture of international affairs: the negotiations, alliances, institutions, competing interests and historical forces that shape how countries interact — and how decisions made in one corner of the world reverberate across another.",
-      "icon": "flag"
+      "icon": "flag",
+      "href": "/writing?category=Diplomacy",
+      "linkLabel": "My writing on diplomacy and international relations"
     },
     {
       "label": "Political Economy",
       "note": "I enjoy exploring the relationship between politics and economics, particularly how trade, investment, financial systems, resources and commercial geography influence the distribution of power between states.",
-      "icon": "scale"
+      "icon": "scale",
+      "href": "/writing?category=International%20Political%20Economy",
+      "linkLabel": "My writing on political economy"
     },
     {
       "label": "Research & Writing",
       "note": "There is something deeply satisfying about starting with a question, getting lost in documents, reports, interviews and conflicting accounts, and eventually bringing the scattered pieces together into a coherent story.",
-      "icon": "pencil"
+      "icon": "pencil",
+      "href": "/writing",
+      "linkLabel": "My research and writing"
     },
     {
       "label": "Data, Technology & AI",
       "note": "I am interested in what emerges when analytical thinking meets technology — using data, AI and automation to simplify complex processes, uncover patterns and turn ideas into practical tools.",
-      "icon": "data"
+      "icon": "data",
+      "href": "/lab",
+      "linkLabel": "My data and AI lab"
     },
     {
       "label": "Photography",
       "note": "Photography is my way of paying attention: an attempt to preserve the atmosphere of a place, the character of a street, the architecture of a city or a fleeting moment that might otherwise disappear.",
-      "icon": "camera"
+      "icon": "camera",
+      "href": "/photography",
+      "linkLabel": "My photography"
     },
     {
       "label": "Running",
       "note": "Running has taught me the relationship between discipline, patience and progress — and that some of the most rewarding distances are the ones you initially thought were beyond your reach.",
-      "icon": "runner"
+      "icon": "runner",
+      "href": "/interests/running",
+      "linkLabel": "My takes on running"
     },
     {
       "label": "Football",
       "note": "Having played as a goalkeeper and captained a team, I see football as more than a game: an exercise in anticipation, responsibility, communication and learning to trust the people around you.",
-      "icon": "ball"
+      "icon": "ball",
+      "href": "/interests/football",
+      "linkLabel": "My takes on football"
     },
     {
       "label": "Music & Drums",
       "note": "Playing drums and writing music have given me another language to express myself — one built around rhythm, collaboration, creativity and the occasional freedom of making an awful lot of noise.",
-      "icon": "drums"
+      "icon": "drums",
+      "href": "/interests/music-and-drums",
+      "linkLabel": "My takes on music and drums"
     },
     {
       "label": "Languages & Cultures",
       "note": "I enjoy learning languages not simply as a means of communication, but as a way of getting closer to how people think, express themselves and understand the world around them.",
-      "icon": "globe"
+      "icon": "globe",
+      "href": "/interests/languages-and-cultures",
+      "linkLabel": "My takes on languages and cultures"
     },
     {
       "label": "Cooking",
       "note": "Cooking is one of my favourite forms of experimentation: creativity, curiosity and technique — and the pleasure of bringing people together around a table.",
-      "icon": "pan"
+      "icon": "pan",
+      "href": "/interests/cooking",
+      "linkLabel": "My takes on cooking"
     }
   ],
   "languages": [

@@ -20,6 +20,8 @@ Run `npm run check-content` (inside `website/`) for an exact, line-by-line list 
 
 ## 🟡 Write
 
+- [ ] **"My takes on…" pages** — `content/interests/` (running, football, music-and-drums, languages-and-cultures, cooking). Reached only from the interest tags on the About page; hidden from navigation and search engines.
+
 - [ ] Personal paragraph for the About page (`profile.json` → last `bio` entry).
 - [ ] One sentence for each interest (photography, writing, running, music & drums, travel, technology).
 - [ ] "What I learned" reflections for each role (everything else is filled in).

@@ -130,7 +130,7 @@ export default function About() {
       </section>
 
       {/* Interests */}
-      <section className="wrap mt-32 md:mt-48" aria-label="Beyond the CV">
+      <section id="interests" className="wrap mt-32 scroll-mt-24 md:mt-48" aria-label="Beyond the CV">
         <div className="border-t hairline pt-5">
           <p className="t-eyebrow">Interests</p>
           <h2 className="t-display mt-8 text-[clamp(3rem,8vw,7.5rem)] uppercase tracking-[0.01em]">Beyond the CV</h2>

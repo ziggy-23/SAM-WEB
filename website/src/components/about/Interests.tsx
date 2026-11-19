@@ -1,10 +1,11 @@
 "use client";
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
+import Link from "next/link";
 import { T } from "../Text";
 import { Doodle } from "./Doodles";
 
-type Interest = { label: string; note?: string; icon?: string };
+type Interest = { label: string; note?: string; icon?: string; href?: string; linkLabel?: string };
 
 const STRINGS = [44, 78, 30, 96, 58, 36, 84, 50, 70, 40];
 // Tag colours, and how the highlighted words read on each.
@@ -92,7 +93,15 @@ export function Interests({ items }: { items: Interest[] }) {
           <motion.div key={current.label} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.45 }}
             className="grid-swiss gap-y-4">
             <p className="t-headline col-span-4 text-2xl text-beige md:col-span-3">{current.label}</p>
-            <p className="col-span-4 max-w-[42ch] font-serif text-[clamp(1.3rem,2.1vw,1.8rem)] leading-snug md:col-span-5 lg:col-span-7 lg:col-start-5"><T>{current.note}</T></p>
+            <div className="col-span-4 md:col-span-5 lg:col-span-7 lg:col-start-5">
+              <p className="max-w-[42ch] font-serif text-[clamp(1.3rem,2.1vw,1.8rem)] leading-snug"><T>{current.note}</T></p>
+              {current.href && (
+                <Link href={current.href} className="group mt-6 inline-flex items-center gap-3 border-b border-orange pb-1 text-base text-text">
+                  {current.linkLabel ?? "Read more"}
+                  <span className="transition-transform duration-500 group-hover:translate-x-1.5">→</span>
+                </Link>
+              )}
+            </div>
           </motion.div>
         </AnimatePresence>
       </div>

@@ -153,6 +153,9 @@ Never paste the full text of someone else's article — link to it.
 ### Experience
 Each job is a file in `content/experience/`. Higher `order` = more recent (the timeline shows newest first). Set `verified: true` once you've checked the details. The body uses the headings *Overview / What I did / Selected work / Impact / What I learned*, but you can use any headings.
 
+### "My takes on…" pages
+Each personal interest in `content/biography/profile.json` has an `href`. Interests with their own page link to `/interests/<file-name>`; write those pages in `content/interests/*.mdx` (`title`, `icon`, `lede` + your text). They are not in the navigation or sitemap and are hidden from search engines — the only way in is through the tags under "Beyond the CV".
+
 ### "What I learned" — the signature section
 Experience and education pages end with a `<Learned>` block. The optional `quote` is set large as a pull-quote:
 
