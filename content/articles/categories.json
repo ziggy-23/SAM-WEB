@@ -1,0 +1,11 @@
+{
+  "_note": "Edit freely. An article's `category` must match one of these labels.",
+  "categories": [
+    "Geopolitics", "Middle East", "International Relations", "International Political Economy",
+    "Finance", "Energy and Oil", "Development", "Diplomacy", "Technology and AI", "Academic Research"
+  ],
+  "types": {
+    "article": "Article", "analysis": "Analysis", "commentary": "Commentary", "research": "Research",
+    "thesis": "Thesis", "policy-brief": "Policy brief", "report": "Report", "paper": "Paper"
+  }
+}

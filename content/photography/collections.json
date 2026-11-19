@@ -1,0 +1,26 @@
+{
+  "_note": "Collections group photographs. These are PLACEHOLDER collections until real photographs are added.",
+  "collections": [
+    {
+      "id": "beirut",
+      "title": "Beirut",
+      "country": "Lebanon",
+      "placeholder": true,
+      "intro": "[ADD COLLECTION INTRO \u2014 optional]"
+    },
+    {
+      "id": "barcelona",
+      "title": "Barcelona",
+      "country": "Spain",
+      "placeholder": true,
+      "intro": "[ADD COLLECTION INTRO \u2014 optional]"
+    },
+    {
+      "id": "paris",
+      "title": "Paris",
+      "country": "France",
+      "placeholder": true,
+      "intro": "[ADD COLLECTION INTRO \u2014 optional]"
+    }
+  ]
+}

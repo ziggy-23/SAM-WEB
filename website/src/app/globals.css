@@ -1,0 +1,224 @@
+@import "tailwindcss";
+
+/* =====================================================================
+   SAM — design tokens
+   Every colour, font and spacing value used on the site is defined here.
+   Tailwind turns each --color-* into utilities (bg-ink, text-beige, …).
+   ===================================================================== */
+@theme {
+  /* Surfaces */
+  --color-ink: #111210;        /* page background, near-black */
+  --color-ink-2: #191a16;      /* secondary background */
+  --color-ink-3: #20211c;      /* elevated surface */
+  --color-void: #0b0b0a;       /* photography — deeper than ink */
+
+  /* Earth palette */
+  --color-olive: #343b2c;
+  --color-olive-2: #4a5440;
+  --color-moss: #8f9a78;       /* readable olive for text on dark (lab accents) */
+  --color-espresso: #382c25;
+  --color-clay: #704c3d;
+  --color-clay-2: #9a6a54;
+  --color-stone: #8b8980;
+  --color-beige: #d8d0bd;
+  --color-orange: #c58b60;     /* the one accent — use sparingly */
+
+  /* Text */
+  --color-text: #e9e6de;
+  --color-muted: #a09e94;
+  --color-faint: #6f6d65;      /* decorative only — not for body text */
+
+  /* Lines */
+  --color-line: rgb(233 230 222 / 0.1);
+  --color-line-2: rgb(233 230 222 / 0.18);
+
+  /* Type */
+  --font-serif: var(--font-newsreader), "Iowan Old Style", Georgia, serif;
+  --font-sans: var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --font-hand: var(--font-caveat), "Bradley Hand", cursive;
+
+  --text-micro: 0.6875rem;
+  --text-micro--line-height: 1.2;
+
+  /* Motion */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+
+  --breakpoint-3xl: 1920px;
+}
+
+:root {
+  --margin: clamp(1.25rem, 4vw, 4.5rem);   /* outer page margin */
+  --gutter: clamp(1rem, 1.6vw, 1.75rem);   /* column gap */
+  --nav-h: 3.75rem;
+  color-scheme: dark;
+}
+
+@layer base {
+  html {
+    background: var(--color-ink);
+    color: var(--color-text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-padding-top: calc(var(--nav-h) + 1rem);
+  }
+  body {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.55;
+    font-feature-settings: "ss01", "cv11";
+    min-height: 100dvh;
+  }
+  ::selection { background: var(--color-orange); color: var(--color-ink); }
+  :focus-visible {
+    outline: 1.5px solid var(--color-orange);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  h1, h2, h3, h4 { text-wrap: balance; }
+  p { text-wrap: pretty; }
+  img, video { max-width: 100%; }
+}
+
+/* Film grain — a static texture, not an animation. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* =====================================================================
+   Layout primitives
+   ===================================================================== */
+@utility wrap {
+  width: 100%;
+  max-width: 1720px;
+  margin-inline: auto;
+  padding-inline: var(--margin);
+}
+/* 4 columns on phones, 8 on tablets, 12 on desktop. */
+@utility grid-swiss {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  @media (width >= 48rem) { grid-template-columns: repeat(8, minmax(0, 1fr)); }
+  @media (width >= 64rem) { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+}
+@utility hairline { border-color: var(--color-line); }
+
+/* =====================================================================
+   Typography roles
+   ===================================================================== */
+@utility t-display {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  letter-spacing: -0.035em;
+  line-height: 0.86;
+}
+@utility t-headline {
+  font-family: var(--font-serif);
+  font-weight: 350;
+  letter-spacing: -0.02em;
+  line-height: 1.04;
+}
+@utility t-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+@utility t-meta {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  color: var(--color-muted);
+}
+@utility t-hand {
+  font-family: var(--font-hand);
+  color: var(--color-orange);
+  line-height: 1.05;
+}
+
+/* Long-form reading. */
+@utility prose-sam {
+  font-family: var(--font-serif);
+  font-size: clamp(1.125rem, 0.6vw + 0.95rem, 1.3125rem);
+  line-height: 1.62;
+  color: color-mix(in oklab, var(--color-text) 92%, var(--color-beige));
+  font-weight: 380;
+  & p { margin-block: 0 1.1em; max-width: 38em; }
+  & h2 {
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-orange);
+    margin: 0 0 1.1rem;
+  }
+  & h3 { font-family: var(--font-serif); font-size: 1.5em; font-weight: 400; margin: 1.6em 0 0.6em; letter-spacing: -0.01em; line-height: 1.15; }
+  & ul, & ol { margin: 0 0 1.2em; padding-left: 1.1em; max-width: 38em; }
+  & ul { list-style: none; padding-left: 0; }
+  & ul > li { position: relative; padding-left: 1.4em; margin-bottom: 0.5em; }
+  & ul > li::before { content: ""; position: absolute; left: 0; top: 0.75em; width: 0.7em; height: 1px; background: var(--color-orange); }
+  & ol > li { margin-bottom: 0.5em; }
+  & a { color: var(--color-text); text-decoration: underline; text-decoration-color: var(--color-orange); text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+  & a:hover { text-decoration-thickness: 2px; }
+  & strong { font-weight: 600; color: var(--color-text); }
+  & em { font-style: italic; }
+  & code { font-family: var(--font-mono); font-size: 0.8em; background: var(--color-ink-3); padding: 0.1em 0.35em; border-radius: 3px; }
+  & blockquote { border-left: 1px solid var(--color-orange); padding-left: 1.2em; margin: 1.6em 0; font-style: italic; color: var(--color-beige); }
+}
+
+/* Links with a drawn underline. */
+@utility link-draw {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.5s var(--ease-out-expo), color 0.3s;
+  padding-bottom: 0.08em;
+  &:hover, &:focus-visible { background-size: 100% 1px; }
+}
+
+/* Placeholders for unverified content: visible, honest, easy to find. */
+@utility placeholder-chip {
+  font-family: var(--font-mono);
+  font-size: 0.72em;
+  letter-spacing: 0.04em;
+  color: var(--color-orange);
+  background: color-mix(in oklab, var(--color-orange) 9%, transparent);
+  border: 1px dashed color-mix(in oklab, var(--color-orange) 45%, transparent);
+  padding: 0.12em 0.45em;
+  border-radius: 2px;
+  font-style: normal;
+  white-space: normal;
+}
+
+/* Blueprint dot-grid used in the lab. */
+@utility dot-grid {
+  background-image: radial-gradient(rgb(233 230 222 / 0.09) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* Hide scrollbars on horizontal rails while keeping them scrollable. */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

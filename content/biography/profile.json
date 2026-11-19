@@ -1,0 +1,43 @@
+{
+  "fullName": "Houssam Mehfara",
+  "preferredName": "Sam",
+  "headline": "Exploring the intersections of politics, economics, technology and the world around us.",
+  "subline": "A personal archive of professional work, research, writing, experiments and photography.",
+  "shortIntro": "My name is Houssam Mehfara, although I go by Sam. I'm Lebanese, trained in political studies and international relations, and interested in where politics, economics and technology meet.",
+  "bio": [
+    "My name is Houssam Mehfara, although I go by Sam.",
+    "I am Lebanese, with an academic background in political studies and international relations. I studied Political Studies at the American University of Beirut, with minors in International Law, Human Rights and Transitional Justice.",
+    "I then pursued a Master's in International Relations at the Institut Barcelona d'Estudis Internacionals (IBEI), concentrating in International Political Economy.",
+    "I have lived, studied or worked across Beirut, Riyadh, Cairo, Paris and Barcelona.",
+    "[ADD PERSONAL PARAGRAPH — what drives your work, in your own words]"
+  ],
+  "focusAreas": [
+    "International relations",
+    "Geopolitics",
+    "International political economy",
+    "Diplomacy",
+    "Public policy",
+    "International development",
+    "Finance and economic analysis",
+    "Data and artificial intelligence",
+    "Research and writing"
+  ],
+  "interests": [
+    { "label": "Photography", "note": "[ADD A SENTENCE — what you photograph and why]" },
+    { "label": "Writing", "note": "[ADD A SENTENCE]" },
+    { "label": "Running", "note": "[ADD A SENTENCE]" },
+    { "label": "Music & drums", "note": "[ADD A SENTENCE]" },
+    { "label": "Travel", "note": "[ADD A SENTENCE]" },
+    { "label": "Technology & experimentation", "note": "[ADD A SENTENCE]" }
+  ],
+  "languages": [
+    { "name": "Arabic", "native": "العربية", "dir": "rtl", "level": null },
+    { "name": "English", "native": "English", "level": null },
+    { "name": "French", "native": "Français", "level": null },
+    { "name": "Spanish", "native": "Español", "level": null },
+    { "name": "Catalan", "native": "Català", "level": null },
+    { "name": "Italian", "native": "Italiano", "level": null },
+    { "name": "Danish", "native": "Dansk", "level": null }
+  ],
+  "portrait": null
+}

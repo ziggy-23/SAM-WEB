@@ -1,0 +1,149 @@
+{
+  "_note": "Put image files in assets/photography/<collection>/ and set src to e.g. 'photography/beirut/corniche.jpg'. Remove placeholders as you add real photographs.",
+  "photos": [
+    {
+      "id": "placeholder-01",
+      "src": null,
+      "aspect": "16:9",
+      "collection": "beirut",
+      "title": "[ADD PHOTOGRAPH 01]",
+      "caption": "Captions are optional. Some photographs get a sentence or two; others simply exist.",
+      "location": null,
+      "date": null,
+      "tags": [],
+      "alt": "Placeholder frame — no photograph yet"
+    },
+    {
+      "id": "placeholder-02",
+      "src": null,
+      "aspect": "2:3",
+      "collection": "beirut",
+      "title": "[ADD PHOTOGRAPH 02]",
+      "caption": null,
+      "location": null,
+      "date": null,
+      "tags": [],
+      "alt": "Placeholder frame — no photograph yet"
+    },
+    {
+      "id": "placeholder-03",
+      "src": null,
+      "aspect": "3:2",
+      "collection": "beirut",
+      "title": "[ADD PHOTOGRAPH 03]",
+      "caption": null,
+      "location": null,
+      "date": null,
+      "tags": [],
+      "alt": "Placeholder frame — no photograph yet"
+    },
+    {
+      "id": "placeholder-04",
+      "src": null,
+      "aspect": "4:5",
+      "collection": "barcelona",
+      "title": "[ADD PHOTOGRAPH 04]",
+      "caption": null,
+      "location": null,
+      "date": null,
+      "tags": [],
+      "alt": "Placeholder frame — no photograph yet"
+    },
+    {
+      "id": "placeholder-05",
+      "src": null,
+      "aspect": "16:9",
+      "collection": "barcelona",
+      "title": "[ADD PHOTOGRAPH 05]",
+      "caption": "[ADD CAPTION — optional]",
+      "location": null,
+      "date": null,
+      "tags": [],
+      "alt": "Placeholder frame — no photograph yet"
+    },
+    {
+      "id": "placeholder-06",
+      "src": null,
+      "aspect": "3:2",
+      "collection": "barcelona",
+      "title": "[ADD PHOTOGRAPH 06]",
+      "caption": null,
+      "location": null,
+      "date": null,
+      "tags": [],
+      "alt": "Placeholder frame — no photograph yet"
+    },
+    {
+      "id": "placeholder-07",
+      "src": null,
+      "aspect": "2:3",
+      "collection": "paris",
+      "title": "[ADD PHOTOGRAPH 07]",
+      "caption": null,
+      "location": null,
+      "date": null,
+      "tags": [],
+      "alt": "Placeholder frame — no photograph yet"
+    },
+    {
+      "id": "placeholder-08",
+      "src": null,
+      "aspect": "3:2",
+      "collection": "paris",
+      "title": "[ADD PHOTOGRAPH 08]",
+      "caption": null,
+      "location": null,
+      "date": null,
+      "tags": [],
+      "alt": "Placeholder frame — no photograph yet"
+    },
+    {
+      "id": "placeholder-09",
+      "src": null,
+      "aspect": "21:9",
+      "collection": "paris",
+      "title": "[ADD PHOTOGRAPH 09]",
+      "caption": null,
+      "location": null,
+      "date": null,
+      "tags": [],
+      "alt": "Placeholder frame — no photograph yet"
+    },
+    {
+      "id": "placeholder-10",
+      "src": null,
+      "aspect": "4:5",
+      "collection": "beirut",
+      "title": "[ADD PHOTOGRAPH 10]",
+      "caption": null,
+      "location": null,
+      "date": null,
+      "tags": [],
+      "alt": "Placeholder frame — no photograph yet"
+    },
+    {
+      "id": "placeholder-11",
+      "src": null,
+      "aspect": "3:2",
+      "collection": "barcelona",
+      "title": "[ADD PHOTOGRAPH 11]",
+      "caption": null,
+      "location": null,
+      "date": null,
+      "tags": [],
+      "alt": "Placeholder frame — no photograph yet"
+    },
+    {
+      "id": "placeholder-12",
+      "src": null,
+      "aspect": "2:3",
+      "collection": "paris",
+      "title": "[ADD PHOTOGRAPH 12]",
+      "caption": null,
+      "location": null,
+      "date": null,
+      "tags": [],
+      "alt": "Placeholder frame — no photograph yet"
+    }
+  ]
+}

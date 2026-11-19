@@ -1,0 +1,15 @@
+{
+  "_note": "Add pieces you recommend. Never paste the full text of someone else's article — link to it and say why it matters.",
+  "items": [
+    {
+      "title": "[ADD ARTICLE TITLE]",
+      "author": "[ADD AUTHOR]",
+      "publication": "[ADD PUBLICATION]",
+      "date": "[ADD DATE]",
+      "url": "",
+      "why": "[ADD ONE OR TWO SENTENCES ON WHY THIS IS WORTH READING]",
+      "tags": ["[ADD TAG]"],
+      "template": true
+    }
+  ]
+}

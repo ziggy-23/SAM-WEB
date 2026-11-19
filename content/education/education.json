@@ -1,0 +1,28 @@
+{
+  "entries": [
+    {
+      "institution": "American University of Beirut",
+      "short": "AUB",
+      "city": "Beirut",
+      "degree": "BA, Political Studies",
+      "detail": "Minors in International Law, Human Rights and Transitional Justice.",
+      "dates": "[ADD VERIFIED DATES]"
+    },
+    {
+      "institution": "Sciences Po Paris",
+      "short": "Sciences Po",
+      "city": "Paris",
+      "degree": "Exchange semester",
+      "detail": "[ADD DETAIL — courses or focus, optional]",
+      "dates": "[ADD VERIFIED DATES]"
+    },
+    {
+      "institution": "Institut Barcelona d'Estudis Internacionals",
+      "short": "IBEI",
+      "city": "Barcelona",
+      "degree": "MA, International Relations",
+      "detail": "Concentration in International Political Economy.",
+      "dates": "[ADD VERIFIED DATES]"
+    }
+  ]
+}
