@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { getExperience, getExperiences, getLabProject, getProject } from "@/lib/content";
 import { Detail } from "@/components/work/Detail";
 import { T } from "@/components/Text";
+import { isPlaceholder } from "@/lib/utils";
 
 export function generateStaticParams() {
   return getExperiences().map((e) => ({ slug: e.slug }));
@@ -36,6 +37,17 @@ export default async function ExperiencePage({ params }: { params: Promise<{ slu
               <p className="mt-3 text-sm text-muted"><T>{h.label}</T></p>
             </div>
           ))}
+          {e.listen && (
+            isPlaceholder(e.listen)
+              ? <p className="placeholder-chip inline-block">EPISODE LINK COMING SOON</p>
+              : <a href={e.listen} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-4 border border-orange px-5 py-4 transition-colors hover:bg-orange hover:text-ink">
+                  <span className="grid size-9 place-items-center rounded-full border border-current" aria-hidden>▶</span>
+                  <span><span className="block text-sm">Listen to the episode</span><span className="t-meta group-hover:!text-ink">BBC World Service ↗</span></span>
+                </a>
+          )}
+          {e.partners.length > 0 && (
+            <div><p className="t-eyebrow mb-3">Clients & partners</p><ul className="divide-y divide-line border-y hairline">{e.partners.map((t) => <li key={t} className="py-2 font-serif text-[1.05rem]">{t}</li>)}</ul></div>
+          )}
           {e.tools.length > 0 && (
             <div><p className="t-eyebrow mb-3">Tools</p><ul className="flex flex-wrap gap-1.5">{e.tools.map((t) => <li key={t} className="t-meta border hairline px-2 py-1"><T>{t}</T></li>)}</ul></div>
           )}

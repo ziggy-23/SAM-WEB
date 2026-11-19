@@ -64,7 +64,10 @@ const ProfileSchema = z.object({
   focusAreas: z.array(z.string()),
   interests: z.array(z.object({ label: z.string(), note: z.string().optional() })),
   languages: z.array(
-    z.object({ name: z.string(), native: z.string(), dir: z.enum(["ltr", "rtl"]).optional(), level: z.string().nullable() }),
+    z.object({
+      name: z.string(), native: z.string(), dir: z.enum(["ltr", "rtl"]).optional(),
+      level: z.string().nullable(), percent: z.number().min(0).max(100).optional(),
+    }),
   ),
   portrait: z.string().nullable(),
 });
@@ -77,24 +80,28 @@ const StopSchema = z.object({
   country: z.string(),
   lat: z.number(),
   lon: z.number(),
+  title: z.string().optional(),
   description: z.string(),
+  essay: z.string().optional(),
 });
 export type JourneyStop = z.infer<typeof StopSchema>;
 export const getJourney = () => readJson("biography/journey.json", z.object({ stops: z.array(StopSchema) })).stops;
 
 const EducationSchema = z.object({
-  entries: z.array(
-    z.object({
-      institution: z.string(),
-      short: z.string(),
-      city: z.string(),
-      degree: z.string(),
-      detail: z.string().optional(),
-      dates: z.string(),
-    }),
-  ),
+  institution: z.string(),
+  short: z.string(),
+  city: z.string(),
+  degree: z.string(),
+  detail: z.string().optional(),
+  dates: z.string(),
+  order: z.number().default(99),
 });
-export const getEducation = () => readJson("education/education.json", EducationSchema).entries;
+export type Education = z.infer<typeof EducationSchema> & { slug: string; body: string };
+export const getEducation = (): Education[] =>
+  readMdxDir("education", EducationSchema)
+    .map((e) => ({ ...e.data, slug: e.slug, body: e.body }))
+    .sort((a, b) => a.order - b.order);
+export const getEducationEntry = (slug: string) => getEducation().find((e) => e.slug === slug);
 
 /* ------------------------------------------------------------ experience */
 
@@ -111,6 +118,8 @@ const ExperienceSchema = z.object({
   skills: z.array(z.string()).default([]),
   highlights: z.array(z.object({ value: z.string(), label: z.string() })).default([]),
   relatedProjects: z.array(z.string()).default([]),
+  partners: z.array(z.string()).default([]),
+  listen: z.string().optional(),
   media: z.array(z.object({ src: z.string(), caption: z.string().optional() })).default([]),
 });
 export type Experience = z.infer<typeof ExperienceSchema> & { slug: string; body: string };

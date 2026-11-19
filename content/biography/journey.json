@@ -1,5 +1,5 @@
 {
-  "_note": "The order is a storytelling device, not a chronology. Refine descriptions in your own words if you like.",
+  "_note": "The order is a storytelling device. `description` appears on the map card; `essay` in 'Places that stayed with me'.",
   "stops": [
     {
       "id": "beirut",
@@ -7,7 +7,9 @@
       "country": "Lebanon",
       "lat": 33.8938,
       "lon": 35.5018,
-      "description": "Home. A dual BA in Political Science at the American University of Beirut, and diaspora policy at the Ministry of Foreign Affairs."
+      "title": "Where two worlds meet",
+      "description": "Home. The American University of Beirut, and the Ministry of Foreign Affairs.",
+      "essay": "A city on the Mediterranean, looking west while remaining deeply rooted in the East, Beirut has spent centuries absorbing influences and reinventing itself. Its contradictions are part of its identity: beautiful and difficult, chaotic and familiar, fragile and remarkably resilient. I have always seen it as an apostrophe between East and West. Wherever I go, some part of me remains there."
     },
     {
       "id": "riyadh",
@@ -15,15 +17,9 @@
       "country": "Saudi Arabia",
       "lat": 24.7136,
       "lon": 46.6753,
-      "description": "Client engagement at the Saudi Entertainment & Amusement Expo, managing 25+ international accounts."
-    },
-    {
-      "id": "cairo",
-      "city": "Cairo",
-      "country": "Egypt",
-      "lat": 30.0444,
-      "lon": 31.2357,
-      "description": "Policy & Strategic Insights intern at the General Secretariat of the League of Arab States."
+      "title": "The scale of possibility",
+      "description": "Two editions of the Saudi Entertainment & Amusement Expo.",
+      "essay": "Riyadh challenged my understanding of what a city could be — endless highways, expanding districts, and a sense of how small one person is inside a modern metropolis. Yet it was the people who made the strongest impression: the warmth of Saudi hospitality, and the importance placed on respect and gratitude. It introduced me to a country in the middle of an extraordinary transformation, and to the people shaping it."
     },
     {
       "id": "paris",
@@ -31,7 +27,19 @@
       "country": "France",
       "lat": 48.8566,
       "lon": 2.3522,
-      "description": "Sciences Po — the Paris half of a dual BA in Political Science."
+      "title": "A city written in history",
+      "description": "A semester at Sciences Po.",
+      "essay": "Paris makes history feel tangible. Its streets, bridges and monuments carry traces of centuries of political change, and almost every corner has a story to tell. But it is also a city of the present — a diplomatic centre where today's debates unfold every day. It is difficult to study international affairs there without feeling that you are standing inside the history you are reading about."
+    },
+    {
+      "id": "cairo",
+      "city": "Cairo",
+      "country": "Egypt",
+      "lat": 30.0444,
+      "lon": 31.2357,
+      "title": "A city that never stands still",
+      "description": "The League of Arab States — the Horn of Africa and Sudan.",
+      "essay": "Cairo is a city of extraordinary contrasts, where ancient history and contemporary life coexist at an almost overwhelming scale. Its streets are full of movement, noise and an energy that never seems to settle. Egypt's civilisation is so immense that even a brief encounter with it leaves you wondering how much lies beyond your understanding. It stays with you long after you leave."
     },
     {
       "id": "barcelona",
@@ -39,7 +47,9 @@
       "country": "Spain",
       "lat": 41.3874,
       "lon": 2.1686,
-      "description": "A Master's in International Relations at IBEI, and consulting on climate and development at GlobalCAD."
+      "title": "A Mediterranean continuation",
+      "description": "A Master's at IBEI, and consulting at GlobalCAD.",
+      "essay": "Barcelona is where academic curiosity, professional life and everyday life have come together. I appreciate its relationship with the Mediterranean, its openness to other cultures, and an identity shaped by both its local history and its international outlook. It has let me build new connections while staying close to the world that has always felt familiar."
     }
   ]
 }

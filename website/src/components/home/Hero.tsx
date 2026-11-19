@@ -41,7 +41,7 @@ export function Hero({ headline, subline, stops }: { headline: string; subline: 
             <span className="sr-only">SAM — </span>
             <span aria-hidden className="t-display -ml-[0.06em] flex text-[clamp(8rem,31vw,30rem)]">
               {"SAM".split("").map((ch, i) => (
-                <span key={i} className="inline-block overflow-hidden">
+                <span key={i} className="-my-[0.1em] inline-block overflow-hidden py-[0.1em]">
                   <motion.span
                     className="inline-block"
                     initial={reduce ? { opacity: 0 } : { y: "100%" }}

@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Noto_Naskh_Arabic } from "next/font/google";
 import { getEducation, getJourney, getProfile } from "@/lib/content";
 import { journeyMap } from "@/lib/geo";
 import { JourneyMap } from "@/components/about/JourneyMap";
 import { Interests } from "@/components/about/Interests";
+import { Languages } from "@/components/about/Languages";
 import { Reveal, SplitWords } from "@/components/motion/Reveal";
 import { T } from "@/components/Text";
 import { SectionHead } from "@/components/SectionHead";
 import { JsonLd, personLd } from "@/components/JsonLd";
 import { Portrait } from "@/components/Portrait";
-import { pad } from "@/lib/utils";
+import { formatCoord } from "@/lib/utils";
 
 const arabic = Noto_Naskh_Arabic({ subsets: ["arabic"], weight: ["400"], preload: false, display: "swap" });
 
@@ -86,19 +88,37 @@ export default function About() {
         </Reveal>
       </section>
 
+      {/* Places */}
+      <section className="wrap mt-32 md:mt-48" aria-label="Places that stayed with me">
+        <SectionHead index="B" label="Places that stayed with me" />
+        <ol className="mt-4">
+          {stops.map((st, i) => (
+            <Reveal as="li" key={st.id} className="grid-swiss items-start gap-y-4 border-b hairline py-12 md:py-16">
+              <div className={`col-span-4 md:col-span-3 lg:col-span-4 ${i % 2 ? "lg:col-start-2" : ""}`}>
+                <p className="t-meta"><span className="text-orange">{String(i + 1).padStart(2, "0")}</span> · {formatCoord(st.lat, st.lon)}</p>
+                <h3 className="t-display mt-4 text-[clamp(3rem,6vw,5.5rem)]">{st.city}</h3>
+                {st.title && <p className="mt-2 font-serif text-xl italic text-beige">{st.title}</p>}
+              </div>
+              <p className={`col-span-4 max-w-[46ch] self-end font-serif text-[1.15rem] leading-relaxed text-text/90 md:col-span-5 lg:col-span-5 ${i % 2 ? "lg:col-start-7" : "lg:col-start-7"}`}>{st.essay}</p>
+            </Reveal>
+          ))}
+        </ol>
+      </section>
+
       {/* Education */}
       <section className="wrap mt-32 md:mt-48" aria-label="Education">
-        <SectionHead index="B" label="Education" title="Political studies, international relations, political economy." />
+        <SectionHead index="C" label="Education" title="Political studies, international relations, political economy." />
         <ol className="relative mt-16 grid gap-y-14 md:grid-cols-3 md:gap-x-[var(--gutter)]">
           <span className="absolute left-0 right-0 top-[5px] hidden h-px bg-line md:block" aria-hidden />
           {education.map((e, i) => (
-            <Reveal as="li" key={e.institution} delay={i * 0.15} className="relative pl-6 md:pl-0">
+            <Reveal as="li" key={e.slug} delay={i * 0.15} className="group relative pl-6 md:pl-0">
               <span className="absolute left-0 top-[1px] block size-[10px] border border-orange bg-ink md:relative md:mb-8" aria-hidden />
               <p className="t-meta"><T>{e.dates}</T></p>
               <p className="t-headline mt-3 text-[clamp(2.2rem,3.5vw,3.25rem)]">{e.short}</p>
               <p className="mt-1 text-sm text-muted">{e.institution} · {e.city}</p>
               <p className="mt-5 font-serif text-xl">{e.degree}</p>
               {e.detail && <p className="mt-2 max-w-[36ch] text-sm text-muted"><T>{e.detail}</T></p>}
+              <Link href={`/education/${e.slug}`} className="t-meta link-draw mt-5 inline-block text-text">The story &amp; what I learned →</Link>
             </Reveal>
           ))}
         </ol>
@@ -106,34 +126,19 @@ export default function About() {
 
       {/* Languages */}
       <section className="wrap mt-32 md:mt-48" aria-label="Languages">
-        <SectionHead index="C" label="Languages" title="Seven languages, in their own words." />
-        <ul className="mt-12 border-b hairline">
-          {p.languages.map((l, i) => (
-            <Reveal as="li" key={l.name} delay={i * 0.05} className="group grid-swiss items-baseline border-t hairline py-4 md:py-5">
-              <span className="col-span-1 font-mono text-xs text-faint">{pad(i + 1)}</span>
-              <span
-                lang={l.name === "Arabic" ? "ar" : undefined}
-                dir={l.dir}
-                className={`col-span-3 text-[clamp(2.25rem,5.5vw,5rem)] leading-none transition-colors group-hover:text-beige md:col-span-5 lg:col-span-6 ${l.name === "Arabic" ? `${arabic.className} text-left` : "t-headline"}`}
-              >
-                {l.native}
-              </span>
-              <span className="t-meta col-span-2 col-start-2 md:col-span-1 md:col-start-auto">{l.name}</span>
-              <span className="t-meta col-span-2 text-right md:col-span-1 lg:col-span-4">
-                {l.level ? l.level : <span className="text-faint">level to be confirmed</span>}
-              </span>
-            </Reveal>
-          ))}
-        </ul>
+        <SectionHead index="D" label="Languages" />
+        <Languages items={p.languages} arabicClass={arabic.className} />
       </section>
 
       {/* Interests */}
-      <section className="wrap mt-32 md:mt-48" aria-label="Personal interests">
-        <SectionHead index="D" label="Off the record" />
-        <div className="grid-swiss mt-12">
-          <div className="col-span-4 md:col-span-8 lg:col-span-10">
-            <Interests items={p.interests} />
-          </div>
+      <section className="wrap mt-32 md:mt-48" aria-label="Beyond the CV">
+        <div className="border-t hairline pt-5">
+          <p className="t-eyebrow"><span className="text-orange">E</span><span className="mx-2 text-faint">/</span>Interests</p>
+          <h2 className="mt-8 text-[clamp(3rem,9vw,8.5rem)] font-semibold uppercase leading-[0.9] tracking-[-0.03em]">Beyond the CV</h2>
+          <p className="t-meta mt-4">Pick one ↓</p>
+        </div>
+        <div className="mt-10">
+          <Interests items={p.interests} />
         </div>
       </section>
     </>

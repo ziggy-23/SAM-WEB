@@ -52,14 +52,16 @@ export default function Work() {
         </div>
       </section>
 
-      <section className="mt-32" aria-label="Education">
-        <SectionHead index="C" label="Education" href="/about" cta="More in About" />
+      <section id="education" className="mt-32 scroll-mt-24" aria-label="Education">
+        <SectionHead index="C" label="Education" />
         <ul className="mt-6">
-          {education.map((e) => (
-            <li key={e.institution} className="grid-swiss items-baseline gap-y-1 border-b hairline py-5">
-              <span className="t-headline col-span-4 text-2xl md:col-span-3 lg:col-span-4">{e.institution}</span>
-              <span className="col-span-4 text-muted md:col-span-3 lg:col-span-5">{e.degree}</span>
-              <span className="t-meta col-span-4 md:col-span-2 md:text-right lg:col-span-3"><T>{e.dates}</T></span>
+          {[...education].reverse().map((e) => (
+            <li key={e.slug}>
+              <Link href={`/education/${e.slug}`} className="group grid-swiss items-baseline gap-y-1 border-b hairline py-5 transition-colors hover:bg-ink-2">
+                <span className="t-headline col-span-4 text-2xl group-hover:text-beige md:col-span-3 lg:col-span-4">{e.institution}</span>
+                <span className="col-span-4 text-muted md:col-span-3 lg:col-span-5">{e.degree}</span>
+                <span className="t-meta col-span-4 md:col-span-2 md:text-right lg:col-span-3"><T>{e.dates}</T> <span className="ml-2 inline-block transition-transform group-hover:translate-x-1">→</span></span>
+              </Link>
             </li>
           ))}
         </ul>

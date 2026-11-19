@@ -30,7 +30,7 @@ export function SplitWords({ text, className, delay = 0, stagger = 0.06 }: { tex
   return (
     <span className={className} aria-label={text} role="text">
       {words.map((w, i) => (
-        <span key={i} aria-hidden className="inline-block overflow-hidden pb-[0.12em] align-top -mb-[0.12em]">
+        <span key={i} aria-hidden className="-mx-[0.1em] -my-[0.18em] inline-block overflow-hidden px-[0.1em] py-[0.18em] align-top">
           <motion.span
             className="inline-block"
             initial={reduce ? { opacity: 0 } : { y: "105%" }}

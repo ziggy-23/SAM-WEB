@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { T } from "../Text";
 import { formatCoord, pad } from "@/lib/utils";
 
-type Stop = { id: string; city: string; country: string; lat: number; lon: number; description: string };
+type Stop = { id: string; city: string; country: string; lat: number; lon: number; title?: string; description: string };
 type MapData = {
   width: number; height: number;
   shapes: { name: string; d: string }[];
@@ -25,6 +25,14 @@ function pointOnPolyline(pts: [number, number][], t: number): [number, number] {
 }
 const ease = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 const polyline = (pts: [number, number][]) => "M" + pts.map((p) => p.join(",")).join("L");
+/** The first fraction `t` of a polyline — used to draw a leg progressively. */
+function partial(pts: [number, number][], t: number): [number, number][] {
+  if (t >= 1) return pts;
+  const f = t * (pts.length - 1);
+  const i = Math.floor(f);
+  return [...pts.slice(0, i + 1), pointOnPolyline(pts, t)];
+}
+const DOTS = { stroke: "#c58b60", strokeWidth: 2.6, strokeLinecap: "round" as const, strokeDasharray: "0.1 7", fill: "none" };
 
 /**
  * An animated map of the places that shaped the biography.
@@ -39,6 +47,7 @@ export function JourneyMap({ stops, map }: { stops: Stop[]; map: MapData }) {
   const [travel, setTravel] = useState<{ leg: number; t: number } | null>(null);
   const [playing, setPlaying] = useState(false);
   const [visited, setVisited] = useState(1);
+  const [arrivals, setArrivals] = useState(0);
   const started = useRef(false);
   const activeRef = useRef(0);
   activeRef.current = active;
@@ -66,6 +75,7 @@ export function JourneyMap({ stops, map }: { stops: Stop[]; map: MapData }) {
         else {
           setTravel(null);
           setActive(leg + 1);
+          setArrivals((n) => n + 1);
           setVisited((v) => Math.max(v, leg + 2));
           timer = setTimeout(() => runLeg(leg + 1), DWELL_MS);
         }
@@ -82,6 +92,7 @@ export function JourneyMap({ stops, map }: { stops: Stop[]; map: MapData }) {
     setTravel(null);
     setActive(i);
     setVisited(stops.length);
+    setArrivals((n) => n + 1);
   }, [stops.length]);
 
   const replay = () => { setActive(0); setVisited(1); setTravel(null); setPlaying(true); };
@@ -111,22 +122,17 @@ export function JourneyMap({ stops, map }: { stops: Stop[]; map: MapData }) {
           {map.seas.map((s) => (
             <text key={s.name} x={s.at[0]} y={s.at[1]} textAnchor="middle" className="fill-stone/50 font-serif italic" fontSize={14} letterSpacing={2}>{s.name}</text>
           ))}
-          {/* all legs, faint */}
-          {map.legs.map((l, i) => (
-            <path key={i} d={polyline(l)} fill="none" stroke="rgba(197,139,96,0.22)" strokeWidth={1} strokeDasharray="2 5" />
-          ))}
-          {/* travelled legs */}
-          {map.legs.map((l, i) => {
-            const done = i < visited - 1;
-            const current = travel?.leg === i;
-            if (!done && !current) return null;
-            return (
-              <path
-                key={`t${i}`} d={polyline(l)} fill="none" stroke="#c58b60" strokeWidth={1.4}
-                pathLength={1} strokeDasharray="1 1" strokeDashoffset={current ? 1 - travel!.t : 0}
-              />
-            );
-          })}
+          {/* The leg just completed fades away while the next one is drawn. */}
+          {travel && travel.leg > 0 && (
+            <motion.path key={`prev-${travel.leg}`} d={polyline(map.legs[travel.leg - 1])} {...DOTS}
+              initial={{ opacity: 1 }} animate={{ opacity: 0 }} transition={{ duration: 1.4, ease: "easeOut" }} />
+          )}
+          {/* The current leg, drawn dot by dot behind the traveller. */}
+          {travel ? (
+            <path d={polyline(partial(map.legs[travel.leg], travel.t))} {...DOTS} />
+          ) : active > 0 ? (
+            <path d={polyline(map.legs[active - 1])} {...DOTS} />
+          ) : null}
           {/* cities */}
           {map.points.map((p, i) => {
             const s = stops[i];
@@ -145,10 +151,18 @@ export function JourneyMap({ stops, map }: { stops: Stop[]; map: MapData }) {
               </g>
             );
           })}
+          {/* Landing: the city ripples. */}
+          {!travel && arrivals > 0 && [0, 0.25, 0.5].map((d) => (
+            <motion.circle key={`ripple-${arrivals}-${d}`} cx={map.points[active].x} cy={map.points[active].y} fill="none" stroke="#c58b60"
+              initial={{ r: 4, opacity: 0.9, strokeWidth: 2 }} animate={{ r: 48, opacity: 0, strokeWidth: 0.5 }}
+              transition={{ duration: 1.6, delay: d, ease: [0.16, 1, 0.3, 1] }} />
+          ))}
           {/* the traveller */}
           <g transform={`translate(${dot[0]},${dot[1]})`} aria-hidden>
-            <circle r={9} fill="#c58b60" opacity={0.18} />
-            <circle r={4} fill="#e9e6de" />
+            <motion.g key={`boom-${arrivals}`} initial={{ scale: travel ? 1 : 1.9 }} animate={{ scale: 1 }} transition={{ type: "spring", stiffness: 300, damping: 12 }}>
+              <circle r={9} fill="#c58b60" opacity={0.18} />
+              <circle r={4} fill="#e9e6de" />
+            </motion.g>
           </g>
           <rect width={map.width} height={map.height} fill="url(#vignette)" pointerEvents="none" />
         </svg>
@@ -204,6 +218,7 @@ function StopCard({ stop, index, total }: { stop: Stop; index: number; total: nu
       >
         <p className="t-meta flex justify-between"><span className="text-orange">{pad(index + 1)} / {pad(total)}</span><span>{stop.country}</span></p>
         <p className="t-headline mt-3 text-4xl">{stop.city}</p>
+        {stop.title && <p className="mt-1 font-serif text-lg italic text-beige">{stop.title}</p>}
         <p className="mt-3 text-sm leading-relaxed text-muted"><T>{stop.description}</T></p>
       </motion.div>
     </AnimatePresence>

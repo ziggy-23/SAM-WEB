@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getExperiences, getLabProjects, getProjects, getWritings } from "@/lib/content";
+import { getEducation, getExperiences, getLabProjects, getProjects, getWritings } from "@/lib/content";
 import { SITE_URL } from "@/lib/utils";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/photography", 0.8), page("/lab", 0.8), page("/work", 0.9), page("/contact", 0.5),
     ...getWritings({ includeDrafts: false }).filter((w) => !w.demo).map((w) => ({ url: `${SITE_URL}/writing/${w.slug}`, lastModified: new Date(w.date), priority: 0.8 })),
     ...getExperiences().map((e) => page(`/work/${e.slug}`, 0.6)),
+    ...getEducation().map((e) => page(`/education/${e.slug}`, 0.6)),
     ...getProjects().map((p) => page(`/work/projects/${p.slug}`, 0.6)),
     ...getLabProjects().map((p) => page(`/lab/${p.slug}`, 0.6)),
   ];

@@ -18,7 +18,7 @@ SAM/                       ← this repository
 ├── content/               ← ALL the words and data on the site — edit these
 │   ├── site.json              contact email and profile links
 │   ├── biography/             profile.json (bio, languages, interests) · journey.json (map cities)
-│   ├── education/             education.json
+│   ├── education/             one .mdx file per institution (story + What I learned)
 │   ├── experience/            one .mdx file per job
 │   ├── articles/              one .mdx file per article · categories.json
 │   ├── research/              one .mdx file per thesis / paper / policy brief
@@ -153,6 +153,19 @@ Never paste the full text of someone else's article — link to it.
 ### Experience
 Each job is a file in `content/experience/`. Higher `order` = more recent (the timeline shows newest first). Set `verified: true` once you've checked the details. The body uses the headings *Overview / What I did / Selected work / Impact / What I learned*, but you can use any headings.
 
+### "What I learned" — the signature section
+Experience and education pages end with a `<Learned>` block. The optional `quote` is set large as a pull-quote:
+
+```mdx
+<Learned quote="One understated sentence that sums it up.">
+
+A few short paragraphs on what the experience changed in how you see things.
+
+</Learned>
+```
+
+Experience frontmatter also supports `partners: [...]` (shown as "Clients & partners") and `listen: "https://…"` (a "Listen to the episode" button).
+
 ### Data & AI lab projects
 Each project is a file in `content/ai-projects/`. The frontmatter holds the problem, motivation, tools, before/after `metrics` and `workflow` steps (set `illustrative: true` if the diagram is a drawing rather than a working system). Add screenshots or recordings via `media`:
 
@@ -164,8 +177,8 @@ media:
 ```
 
 ### Biography, languages, map cities, contact links
-- `content/biography/profile.json` — bio paragraphs, interests, languages (`"level": "Native"` etc. once you want levels shown).
-- `content/biography/journey.json` — the cities on the About map. Add a city with its latitude/longitude and it appears on the map automatically.
+- `content/biography/profile.json` — bio paragraphs, interests (one sentence each — they appear as hanging tags under "Beyond the CV"), languages (`level` label and `percent` for the bar).
+- `content/biography/journey.json` — the cities on the About map, in the order the point travels. `description` shows on the map card, `essay` in "Places that stayed with me". Add a city with its latitude/longitude and it appears automatically.
 - `content/site.json` — public email and profile links. Links still starting with `[ADD` are hidden from the footer.
 - Portrait: put it in `assets/portraits/` and set `"portrait": "portraits/sam.jpg"` in `profile.json`.
 

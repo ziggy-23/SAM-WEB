@@ -3,14 +3,14 @@
   "preferredName": "Sam",
   "headline": "Exploring the intersections of politics, economics, technology and the world around us.",
   "subline": "A personal archive of professional work, research, writing, experiments and photography.",
-  "shortIntro": "My name is Houssam Mehfara, although I go by Sam. I'm Lebanese, based in Barcelona, trained in political science and international relations, and interested in where politics, economics and technology meet.",
+  "shortIntro": "My name is Houssam Mehfara, although I go by Sam. I have always been drawn to places, people and ideas that make the world feel a little larger — and to the connections between politics, economics, geography and technology.",
   "bio": [
-    "My name is Houssam Mehfara, although I go by Sam.",
-    "I am Lebanese and based in Barcelona. I studied Political Science in a dual degree between the American University of Beirut and Sciences Po Paris, with minors in International Law, Human Rights and Transitional Justice.",
-    "I then completed a Master's in International Relations at the Institut Barcelona d'Estudis Internacionals (IBEI), concentrating in International Political Economy, with a thesis on the disruption of the Red Sea shipping corridor and international trade.",
-    "Today I work as a Junior Consultant at GlobalCAD, on climate and development projects with UN agencies, governments and European programmes. Before that I worked in client engagement in Riyadh, interned at the League of Arab States in Cairo, worked on diaspora policy at Lebanon's Ministry of Foreign Affairs, and contributed research and interviews to a BBC World Service project.",
-    "I have lived, studied or worked across Beirut, Riyadh, Cairo, Paris and Barcelona.",
-    "[ADD PERSONAL PARAGRAPH — what drives your work, in your own words]"
+    "My name is Houssam Mehfara, although I go by Sam. I have always been drawn to places, people and ideas that make the world feel a little larger.",
+    "My path so far has run across the Mediterranean — from Beirut to Riyadh, Paris, Cairo and Barcelona — through universities, government institutions, international organisations and the private sector. I studied Political Studies at the American University of Beirut, spent a semester at Sciences Po, and completed a Master's in International Relations at IBEI, specialising in International Political Economy. Today I work as a junior consultant at GlobalCAD in Barcelona.",
+    "I have never been particularly interested in understanding the world through a single discipline. Politics cannot be separated from economics, economics from geography, geography from history — and none of them from the people who live through their consequences. I am drawn to the connections between seemingly distant things: a maritime chokepoint and the price of food, a trade agreement and a country's foreign policy, a diplomatic decision and the everyday lives of people thousands of kilometres away.",
+    "More recently, that curiosity has turned towards data, artificial intelligence and automation. I like the point where analytical thinking meets practical implementation: understanding a problem, finding the information that matters, and building something useful out of it.",
+    "The Mediterranean has always been my geographical and emotional reference point. Its shores connect the places that have shaped me. I sometimes think of it as an apostrophe between East and West: a small mark connecting two worlds that have never really been separate.",
+    "This website is a record of that journey — places visited, things learned, ideas explored and work undertaken. Not a finished story; one that is still very much unfolding."
   ],
   "focusAreas": [
     "International relations",
@@ -25,28 +25,44 @@
   ],
   "interests": [
     {
-      "label": "Photography",
-      "note": "[ADD A SENTENCE — what you photograph and why]"
+      "label": "International Relations & Diplomacy",
+      "note": "I am fascinated by the invisible architecture of international affairs: the negotiations, alliances, institutions, competing interests and historical forces that shape how countries interact — and how decisions made in one corner of the world reverberate across another."
     },
     {
-      "label": "Writing",
-      "note": "[ADD A SENTENCE]"
+      "label": "Political Economy",
+      "note": "I enjoy exploring the relationship between politics and economics, particularly how trade, investment, financial systems, resources and commercial geography influence the distribution of power between states."
+    },
+    {
+      "label": "Research & Writing",
+      "note": "There is something deeply satisfying about starting with a question, getting lost in documents, reports, interviews and conflicting accounts, and eventually bringing the scattered pieces together into a coherent story."
+    },
+    {
+      "label": "Data, Technology & AI",
+      "note": "I am interested in what emerges when analytical thinking meets technology — using data, AI and automation to simplify complex processes, uncover patterns and turn ideas into practical tools."
+    },
+    {
+      "label": "Photography",
+      "note": "Photography is my way of paying attention: an attempt to preserve the atmosphere of a place, the character of a street, the architecture of a city or a fleeting moment that might otherwise disappear."
     },
     {
       "label": "Running",
-      "note": "[ADD A SENTENCE]"
+      "note": "Running has taught me the relationship between discipline, patience and progress — and that some of the most rewarding distances are the ones you initially thought were beyond your reach."
     },
     {
-      "label": "Music & drums",
-      "note": "[ADD A SENTENCE]"
+      "label": "Football",
+      "note": "Having played as a goalkeeper and captained a team, I see football as more than a game: an exercise in anticipation, responsibility, communication and learning to trust the people around you."
     },
     {
-      "label": "Travel",
-      "note": "[ADD A SENTENCE]"
+      "label": "Music & Drums",
+      "note": "Playing drums and writing music have given me another language to express myself — one built around rhythm, collaboration, creativity and the occasional freedom of making an awful lot of noise."
     },
     {
-      "label": "Technology & experimentation",
-      "note": "[ADD A SENTENCE]"
+      "label": "Languages & Cultures",
+      "note": "I enjoy learning languages not simply as a means of communication, but as a way of getting closer to how people think, express themselves and understand the world around them."
+    },
+    {
+      "label": "Cooking",
+      "note": "Cooking is one of my favourite forms of experimentation: creativity, curiosity and technique — and the pleasure of bringing people together around a table."
     }
   ],
   "languages": [
@@ -54,37 +70,44 @@
       "name": "Arabic",
       "native": "العربية",
       "dir": "rtl",
-      "level": "Native"
+      "level": "Native",
+      "percent": 100
     },
     {
       "name": "English",
       "native": "English",
-      "level": "Native (C2)"
+      "level": "Native",
+      "percent": 100
     },
     {
       "name": "French",
       "native": "Français",
-      "level": "Native"
+      "level": "Native",
+      "percent": 100
     },
     {
       "name": "Spanish",
       "native": "Español",
-      "level": "Fluent (C1)"
+      "level": "C1",
+      "percent": 80
     },
     {
       "name": "Catalan",
       "native": "Català",
-      "level": "Intermediate (B2)"
-    },
-    {
-      "name": "Italian",
-      "native": "Italiano",
-      "level": "Basic"
+      "level": "B2",
+      "percent": 65
     },
     {
       "name": "Danish",
       "native": "Dansk",
-      "level": "Intermediate"
+      "level": "B1",
+      "percent": 45
+    },
+    {
+      "name": "Italian",
+      "native": "Italiano",
+      "level": "A2",
+      "percent": 30
     }
   ],
   "portrait": "portraits/sam.jpg"

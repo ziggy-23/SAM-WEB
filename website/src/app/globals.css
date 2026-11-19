@@ -222,3 +222,15 @@ body::before {
     scroll-behavior: auto !important;
   }
 }
+
+/* "Beyond the CV" — hanging tags */
+@keyframes swing {
+  0%, 100% { transform: rotate(-2.2deg); }
+  50% { transform: rotate(2.2deg); }
+}
+.swing { transform-origin: top center; animation: swing 4s ease-in-out infinite; }
+.tag { clip-path: polygon(18% 0, 82% 0, 100% 14%, 100% 100%, 0 100%, 0 14%); }
+
+/* Indeterminate "more to come" loading bar */
+@keyframes sweep { from { left: -25%; } to { left: 100%; } }
+.loading-sweep { animation: sweep 2.2s ease-in-out infinite; }

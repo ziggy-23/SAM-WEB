@@ -12,13 +12,13 @@ Run `npm run check-content` (inside `website/`) for an exact, line-by-line list 
 - [ ] **Contact form** — create a Resend account, verify a sending domain, set the 3 environment variables in Vercel (see README §4).
 - [ ] **Domain name** — optional; then set `NEXT_PUBLIC_SITE_URL` in Vercel.
 
-## 🟠 Check (filled from your CVs — confirm you're happy with the public wording)
+## 🟠 Check
 
-- [ ] BBC: titled "Research Journalist" (your brief); your 2022 CV says "Research interviewer", Oct–Dec 2020, London. Adjust if needed.
-- [ ] SEA Expo title: "Client Engagement Associate" (latest English CV). Older CVs say "Sales Engineer"; the Spanish CV says "Consultor de Relaciones con Clientes".
-- [ ] GlobalCAD bullets mention UNICEF, Yemen's Ministry of Water and Environment, the Union for the Mediterranean, Interreg MED and PROREV/AfDB — confirm these client names can be public.
+- [ ] **BBC episode link** — add it as `listen:` in `content/experience/bbc.mdx` (shows a "Listen to the episode" button).
+- [ ] **Sciences Po** — now shown as an exchange semester (Aug–Dec 2023), as you wrote. Your recent CVs describe a dual degree with AUB; make sure the public version is the one you want.
+- [ ] **MFA title** — now "Intern, Ministry of Foreign Affairs and Emigrants", as you wrote. Your recent CVs say "International Affairs Associate".
+- [ ] **GlobalCAD end date** — still "Present". Your text is written in the past tense; set `end:` if you've left.
 - [ ] AUB Alumni Network Spain — year you became Vice President.
-- [ ] Grades (8.8/10 IBEI, 17.2/20 Sciences Po, 3.7/4 AUB) were deliberately **not** published. Say if you want them shown.
 
 ## 🟡 Write
 
