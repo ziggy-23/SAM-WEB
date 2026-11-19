@@ -73,8 +73,8 @@ export function regionMap(highlight: string[], opts: { center?: [number, number]
   const projection = geoConicConformal()
     .parallels([25, 45])
     .rotate([-(opts.center?.[0] ?? 33), 0])
-    .center([0, opts.center?.[1] ?? 30])
-    .scale(opts.scale ?? 1100)
+    .center([0, opts.center?.[1] ?? 31])
+    .scale(opts.scale ?? 720)
     .translate([width / 2, height / 2])
     .clipExtent([[0, 0], [width, height]]);
   const base = project(projection, width, height, "50m", highlight);

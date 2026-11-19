@@ -105,7 +105,7 @@ export function JourneyMap({ stops, map }: { stops: Stop[]; map: MapData }) {
           <path d={map.graticule} fill="none" stroke="rgba(233,230,222,0.045)" strokeWidth={0.6} />
           <g>
             {map.shapes.map((s) => (
-              <path key={s.name} d={s.d} fill="#1b1c18" stroke="rgba(233,230,222,0.13)" strokeWidth={0.5} strokeLinejoin="round" />
+              <path key={s.name} d={s.d} fill="#1d1e1a" stroke="rgba(233,230,222,0.13)" strokeWidth={0.5} strokeLinejoin="round" />
             ))}
           </g>
           {map.seas.map((s) => (
