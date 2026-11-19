@@ -6,32 +6,29 @@ Run `npm run check-content` (inside `website/`) for an exact, line-by-line list 
 ## 🔴 Needed before going public
 
 - [x] ~~Contact details~~ — email and LinkedIn added.
+- [x] ~~Employment dates, titles, locations, role order~~ — filled from your CVs on Google Drive (Sept 2026 versions; 2022 CV for the BBC role).
+- [x] ~~Education dates~~ — AUB & Sciences Po dual BA 2021–2024; IBEI MA 2024–2026.
 - [ ] Photography profile URL — once you start posting (`content/site.json`).
-- [ ] **Contact form** — create a Resend account, verify a sending domain, set the 3 environment variables (see README §4).
-- [ ] **Employment dates** for all five roles (`content/experience/*.mdx` → `start`, `end`).
-- [ ] **Role ordering** — the timeline currently assumes this order, most recent first: GlobalCAD → SEA Expo → League of Arab States → MFA Lebanon → BBC. Correct the `order` numbers if wrong.
-- [ ] **Ministry of Foreign Affairs, Lebanon** — exact role title and city.
-- [ ] **BBC** — location (city/bureau) and one-line summary.
-- [ ] **Education dates** — AUB, Sciences Po, IBEI (`content/education/education.json`).
-- [ ] **Domain name** — choose and buy one (optional; free `*.vercel.app` works), then set `NEXT_PUBLIC_SITE_URL`.
+- [ ] **Contact form** — create a Resend account, verify a sending domain, set the 3 environment variables in Vercel (see README §4).
+- [ ] **Domain name** — optional; then set `NEXT_PUBLIC_SITE_URL` in Vercel.
 
-## 🟠 Verify (currently shown with "VERIFY" labels)
+## 🟠 Check (filled from your CVs — confirm you're happy with the public wording)
 
-- [x] ~~GlobalCAD 30% figure~~ — confirmed for public use. (Optional: add how it was measured.)
-- [ ] GlobalCAD: tools list (Excel, SQL, Stata, R, Python, AI tools) — keep only what you actually used there.
-- [ ] Tender-screening workflow steps (`content/ai-projects/tender-screening.mdx`) — these are generic placeholders; replace with the real process. Confirm what you're comfortable sharing publicly about a client-facing/internal tool.
-- [ ] Map city descriptions (`content/biography/journey.json`) — rewrite in your own words.
-- [ ] Language proficiency levels — add only if you want them shown (`content/biography/profile.json` → `level`).
+- [ ] BBC: titled "Research Journalist" (your brief); your 2022 CV says "Research interviewer", Oct–Dec 2020, London. Adjust if needed.
+- [ ] SEA Expo title: "Client Engagement Associate" (latest English CV). Older CVs say "Sales Engineer"; the Spanish CV says "Consultor de Relaciones con Clientes".
+- [ ] GlobalCAD bullets mention UNICEF, Yemen's Ministry of Water and Environment, the Union for the Mediterranean, Interreg MED and PROREV/AfDB — confirm these client names can be public.
+- [ ] AUB Alumni Network Spain — year you became Vice President.
+- [ ] Grades (8.8/10 IBEI, 17.2/20 Sciences Po, 3.7/4 AUB) were deliberately **not** published. Say if you want them shown.
 
 ## 🟡 Write
 
 - [ ] Personal paragraph for the About page (`profile.json` → last `bio` entry).
 - [ ] One sentence for each interest (photography, writing, running, music & drums, travel, technology).
-- [ ] Full stories for each role: overview, what you did, selected work, impact, what you learned.
-- [ ] Master's thesis: title, abstract; decide whether to publish (currently `draft: true`, hidden on the live site).
+- [ ] "What I learned" reflections for each role (everything else is filled in).
+- [ ] Master's thesis: exact title and abstract; decide whether to publish the full text (the archive entry is `draft: true`; the topic is shown as a project card).
 - [ ] First real article(s) in `content/articles/`.
 - [ ] Reading list: first recommendations (replace the template entry).
-- [ ] Lab project write-up: problem, motivation, real architecture, lessons.
+- [ ] Lab project: optional architecture details and lessons learned (problem, motivation and workflow are filled in).
 - [ ] Optional: CV PDF to offer as a download.
 
 ## 🟢 Assets

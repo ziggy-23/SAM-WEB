@@ -3,11 +3,12 @@
   "preferredName": "Sam",
   "headline": "Exploring the intersections of politics, economics, technology and the world around us.",
   "subline": "A personal archive of professional work, research, writing, experiments and photography.",
-  "shortIntro": "My name is Houssam Mehfara, although I go by Sam. I'm Lebanese, trained in political studies and international relations, and interested in where politics, economics and technology meet.",
+  "shortIntro": "My name is Houssam Mehfara, although I go by Sam. I'm Lebanese, based in Barcelona, trained in political science and international relations, and interested in where politics, economics and technology meet.",
   "bio": [
     "My name is Houssam Mehfara, although I go by Sam.",
-    "I am Lebanese, with an academic background in political studies and international relations. I studied Political Studies at the American University of Beirut, with minors in International Law, Human Rights and Transitional Justice.",
-    "I then pursued a Master's in International Relations at the Institut Barcelona d'Estudis Internacionals (IBEI), concentrating in International Political Economy.",
+    "I am Lebanese and based in Barcelona. I studied Political Science in a dual degree between the American University of Beirut and Sciences Po Paris, with minors in International Law, Human Rights and Transitional Justice.",
+    "I then completed a Master's in International Relations at the Institut Barcelona d'Estudis Internacionals (IBEI), concentrating in International Political Economy, with a thesis on the disruption of the Red Sea shipping corridor and international trade.",
+    "Today I work as a Junior Consultant at GlobalCAD, on climate and development projects with UN agencies, governments and European programmes. Before that I worked in client engagement in Riyadh, interned at the League of Arab States in Cairo, worked on diaspora policy at Lebanon's Ministry of Foreign Affairs, and contributed research and interviews to a BBC World Service project.",
     "I have lived, studied or worked across Beirut, Riyadh, Cairo, Paris and Barcelona.",
     "[ADD PERSONAL PARAGRAPH — what drives your work, in your own words]"
   ],
@@ -53,37 +54,37 @@
       "name": "Arabic",
       "native": "العربية",
       "dir": "rtl",
-      "level": null
+      "level": "Native"
     },
     {
       "name": "English",
       "native": "English",
-      "level": null
+      "level": "Native (C2)"
     },
     {
       "name": "French",
       "native": "Français",
-      "level": null
+      "level": "Native"
     },
     {
       "name": "Spanish",
       "native": "Español",
-      "level": null
+      "level": "Fluent (C1)"
     },
     {
       "name": "Catalan",
       "native": "Català",
-      "level": null
+      "level": "Intermediate (B2)"
     },
     {
       "name": "Italian",
       "native": "Italiano",
-      "level": null
+      "level": "Basic"
     },
     {
       "name": "Danish",
       "native": "Dansk",
-      "level": null
+      "level": "Intermediate"
     }
   ],
   "portrait": "portraits/sam.jpg"

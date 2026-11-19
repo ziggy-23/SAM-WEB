@@ -34,7 +34,6 @@ export default function Work() {
       <section aria-label="Professional timeline">
         <SectionHead index="A" label="Timeline" />
         <div className="mt-6"><Timeline entries={entries} /></div>
-        <p className="t-meta mt-6 text-faint">Ordering and dates are pending verification.</p>
       </section>
 
       <section id="projects" className="mt-32 scroll-mt-24" aria-label="Projects and achievements">
