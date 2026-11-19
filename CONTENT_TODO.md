@@ -14,10 +14,8 @@ Run `npm run check-content` (inside `website/`) for an exact, line-by-line list 
 
 ## 🟠 Check
 
+- [x] ~~Sciences Po dual degree, MFA title (International Affairs Associate), GlobalCAD ongoing~~ — confirmed.
 - [ ] **BBC episode link** — add it as `listen:` in `content/experience/bbc.mdx` (shows a "Listen to the episode" button).
-- [ ] **Sciences Po** — now shown as an exchange semester (Aug–Dec 2023), as you wrote. Your recent CVs describe a dual degree with AUB; make sure the public version is the one you want.
-- [ ] **MFA title** — now "Intern, Ministry of Foreign Affairs and Emigrants", as you wrote. Your recent CVs say "International Affairs Associate".
-- [ ] **GlobalCAD end date** — still "Present". Your text is written in the past tense; set `end:` if you've left.
 - [ ] AUB Alumni Network Spain — year you became Vice President.
 
 ## 🟡 Write
