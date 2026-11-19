@@ -23,21 +23,68 @@
     "Research and writing"
   ],
   "interests": [
-    { "label": "Photography", "note": "[ADD A SENTENCE — what you photograph and why]" },
-    { "label": "Writing", "note": "[ADD A SENTENCE]" },
-    { "label": "Running", "note": "[ADD A SENTENCE]" },
-    { "label": "Music & drums", "note": "[ADD A SENTENCE]" },
-    { "label": "Travel", "note": "[ADD A SENTENCE]" },
-    { "label": "Technology & experimentation", "note": "[ADD A SENTENCE]" }
+    {
+      "label": "Photography",
+      "note": "[ADD A SENTENCE — what you photograph and why]"
+    },
+    {
+      "label": "Writing",
+      "note": "[ADD A SENTENCE]"
+    },
+    {
+      "label": "Running",
+      "note": "[ADD A SENTENCE]"
+    },
+    {
+      "label": "Music & drums",
+      "note": "[ADD A SENTENCE]"
+    },
+    {
+      "label": "Travel",
+      "note": "[ADD A SENTENCE]"
+    },
+    {
+      "label": "Technology & experimentation",
+      "note": "[ADD A SENTENCE]"
+    }
   ],
   "languages": [
-    { "name": "Arabic", "native": "العربية", "dir": "rtl", "level": null },
-    { "name": "English", "native": "English", "level": null },
-    { "name": "French", "native": "Français", "level": null },
-    { "name": "Spanish", "native": "Español", "level": null },
-    { "name": "Catalan", "native": "Català", "level": null },
-    { "name": "Italian", "native": "Italiano", "level": null },
-    { "name": "Danish", "native": "Dansk", "level": null }
+    {
+      "name": "Arabic",
+      "native": "العربية",
+      "dir": "rtl",
+      "level": null
+    },
+    {
+      "name": "English",
+      "native": "English",
+      "level": null
+    },
+    {
+      "name": "French",
+      "native": "Français",
+      "level": null
+    },
+    {
+      "name": "Spanish",
+      "native": "Español",
+      "level": null
+    },
+    {
+      "name": "Catalan",
+      "native": "Català",
+      "level": null
+    },
+    {
+      "name": "Italian",
+      "native": "Italiano",
+      "level": null
+    },
+    {
+      "name": "Danish",
+      "native": "Dansk",
+      "level": null
+    }
   ],
-  "portrait": null
+  "portrait": "portraits/sam.jpg"
 }

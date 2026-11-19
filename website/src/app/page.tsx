@@ -5,6 +5,7 @@ import { MiniFlow } from "@/components/home/MiniFlow";
 import { SectionHead } from "@/components/SectionHead";
 import { Reveal, SplitWords } from "@/components/motion/Reveal";
 import { PhotoFrame } from "@/components/PhotoFrame";
+import { Portrait } from "@/components/Portrait";
 import { T } from "@/components/Text";
 import { JsonLd, personLd } from "@/components/JsonLd";
 import {
@@ -35,6 +36,11 @@ export default function Home() {
             <SplitWords text={profile.shortIntro} stagger={0.018} />
           </p>
           <Reveal delay={0.2} className="col-span-4 md:col-span-4 lg:col-span-3 lg:col-start-10">
+            {profile.portrait && (
+              <div className="mb-10 w-2/3 md:w-full">
+                <Portrait src={profile.portrait} alt={`Portrait of ${profile.fullName}`} sizes="(min-width:1024px) 25vw, (min-width:768px) 50vw, 66vw" />
+              </div>
+            )}
             <p className="t-eyebrow mb-4">Areas of interest</p>
             <ul className="divide-y divide-line border-y hairline">
               {profile.focusAreas.map((f, i) => (

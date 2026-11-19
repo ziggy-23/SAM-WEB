@@ -5,7 +5,8 @@ Run `npm run check-content` (inside `website/`) for an exact, line-by-line list 
 
 ## 🔴 Needed before going public
 
-- [ ] **Contact details** — `content/site.json`: public email address, LinkedIn URL, photography profile URL, (optional) GitHub. Nothing is shown until added.
+- [x] ~~Contact details~~ — email and LinkedIn added.
+- [ ] Photography profile URL — once you start posting (`content/site.json`).
 - [ ] **Contact form** — create a Resend account, verify a sending domain, set the 3 environment variables (see README §4).
 - [ ] **Employment dates** for all five roles (`content/experience/*.mdx` → `start`, `end`).
 - [ ] **Role ordering** — the timeline currently assumes this order, most recent first: GlobalCAD → SEA Expo → League of Arab States → MFA Lebanon → BBC. Correct the `order` numbers if wrong.
@@ -16,7 +17,7 @@ Run `npm run check-content` (inside `website/`) for an exact, line-by-line list 
 
 ## 🟠 Verify (currently shown with "VERIFY" labels)
 
-- [ ] GlobalCAD: the "≈30% reduction in analysis time" figure — confirm it and how it was measured, or remove.
+- [x] ~~GlobalCAD 30% figure~~ — confirmed for public use. (Optional: add how it was measured.)
 - [ ] GlobalCAD: tools list (Excel, SQL, Stata, R, Python, AI tools) — keep only what you actually used there.
 - [ ] Tender-screening workflow steps (`content/ai-projects/tender-screening.mdx`) — these are generic placeholders; replace with the real process. Confirm what you're comfortable sharing publicly about a client-facing/internal tool.
 - [ ] Map city descriptions (`content/biography/journey.json`) — rewrite in your own words.
@@ -35,7 +36,7 @@ Run `npm run check-content` (inside `website/`) for an exact, line-by-line list 
 
 ## 🟢 Assets
 
-- [ ] Portrait (`assets/portraits/`, 4:5 works best) → set `portrait` in `profile.json`.
+- [x] ~~Portrait~~ — added (`assets/portraits/sam.jpg`).
 - [ ] Photographs (`assets/photography/<collection>/`) → replace the 12 placeholder entries in `content/photography/photos.json`.
 - [ ] Confirm photography collections (Beirut, Barcelona, Paris are placeholders) — add/rename as appropriate.
 - [ ] Optional: screenshots / screen recordings for lab projects (`assets/videos/`, `assets/graphics/`).

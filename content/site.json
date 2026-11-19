@@ -2,11 +2,18 @@
   "title": "SAM",
   "description": "Exploring the intersections of politics, economics, technology and the world around us. The personal archive of Houssam (Sam) Mehfara.",
   "contact": {
-    "email": "[ADD PUBLIC CONTACT EMAIL]",
+    "email": "hmehfara@gmail.com",
     "links": [
-      { "label": "LinkedIn", "url": "[ADD LINKEDIN URL]", "kind": "professional" },
-      { "label": "Photography", "url": "[ADD PHOTOGRAPHY PROFILE URL]", "kind": "photography" },
-      { "label": "GitHub", "url": "[ADD GITHUB URL — optional]", "kind": "technical" }
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/houssam-mehfara",
+        "kind": "professional"
+      },
+      {
+        "label": "Photography",
+        "url": "[ADD PHOTOGRAPHY PROFILE URL — coming later]",
+        "kind": "photography"
+      }
     ]
   }
 }

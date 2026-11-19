@@ -8,7 +8,7 @@ import { Reveal, SplitWords } from "@/components/motion/Reveal";
 import { T } from "@/components/Text";
 import { SectionHead } from "@/components/SectionHead";
 import { JsonLd, personLd } from "@/components/JsonLd";
-import { PhotoFrame } from "@/components/PhotoFrame";
+import { Portrait } from "@/components/Portrait";
 import { pad } from "@/lib/utils";
 
 const arabic = Noto_Naskh_Arabic({ subsets: ["arabic"], weight: ["400"], preload: false, display: "swap" });
@@ -49,7 +49,10 @@ export default function About() {
         <div className="grid-swiss gap-y-12">
           <Reveal className="col-span-4 md:col-span-3 lg:col-span-4">
             {p.portrait ? (
-              <PhotoFrame photo={{ id: "portrait", src: p.portrait, aspect: "4:5", collection: "", alt: `Portrait of ${p.fullName}`, tags: [] }} sizes="33vw" />
+              <figure className="lg:sticky lg:top-28">
+                <Portrait src={p.portrait} alt={`Portrait of ${p.fullName}`} sizes="(min-width:1024px) 33vw, (min-width:768px) 40vw, 100vw" priority />
+                <figcaption className="t-meta mt-3 flex justify-between"><span>{p.fullName}</span><span className="text-faint">Sam</span></figcaption>
+              </figure>
             ) : (
               <div className="relative aspect-[4/5] border border-dashed border-line-2 bg-ink-2">
                 <span className="placeholder-chip absolute left-4 top-4">ADD PORTRAIT — assets/portraits/</span>
