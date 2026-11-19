@@ -28,6 +28,8 @@ export function Globe({ stops }: { stops: Stop[] }) {
     const ROT_MS = reduce ? 0 : 2600;
     const ARC_MS = reduce ? 0 : 2400;
     const pointer = { x: 0, y: 0, tx: 0, ty: 0 };
+    // Drag-to-spin (mouse/pen only, so touch scrolling is untouched), with momentum.
+    const spin = { x: 0, y: 0, vx: 0, dragging: false, lastX: 0, lastY: 0 };
     let visible = true;
 
     const projection = geoOrthographic().clipAngle(90).precision(0.5);
@@ -50,8 +52,9 @@ export function Globe({ stops }: { stops: Stop[] }) {
       const e = easeOut(tRot);
       pointer.x += (pointer.tx - pointer.x) * 0.06;
       pointer.y += (pointer.ty - pointer.y) * 0.06;
-      const lon = START[0] + (CENTER[0] - START[0]) * e + pointer.x * 6;
-      const lat = START[1] + (CENTER[1] - START[1]) * e - pointer.y * 4;
+      if (!spin.dragging && Math.abs(spin.vx) > 0.01) { spin.x += spin.vx; spin.vx *= 0.94; }
+      const lon = START[0] + (CENTER[0] - START[0]) * e + pointer.x * 12 - spin.x;
+      const lat = Math.max(-70, Math.min(70, START[1] + (CENTER[1] - START[1]) * e - pointer.y * 7 + spin.y));
       projection.rotate([-lon, -lat, 0]);
       const centre: [number, number] = [lon, lat];
       const w = size, h = canvas.height / Math.min(window.devicePixelRatio || 1, 2);
@@ -114,7 +117,7 @@ export function Globe({ stops }: { stops: Stop[] }) {
       });
 
       const settling = Math.abs(pointer.tx - pointer.x) > 0.001 || Math.abs(pointer.ty - pointer.y) > 0.001;
-      const animating = now - t0 < ROT_MS + ARC_MS * 1.1 || settling;
+      const animating = now - t0 < ROT_MS + ARC_MS * 1.1 || settling || spin.dragging || Math.abs(spin.vx) > 0.01;
       if (animating && visible && !disposed) raf = requestAnimationFrame(draw);
       else raf = 0;
     }
@@ -126,6 +129,30 @@ export function Globe({ stops }: { stops: Stop[] }) {
       pointer.ty = (e.clientY / window.innerHeight - 0.5) * 2;
       kick();
     };
+
+    const zone = (canvas.closest("section") as HTMLElement | null) ?? canvas;
+    const fine = window.matchMedia("(pointer: fine)").matches;
+    if (fine) zone.style.cursor = "grab";
+    const onDown = (e: PointerEvent) => {
+      if (e.pointerType === "touch" || e.button !== 0 || (e.target as HTMLElement).closest("a, button")) return;
+      spin.dragging = true; spin.vx = 0; spin.lastX = e.clientX; spin.lastY = e.clientY;
+      zone.style.cursor = "grabbing"; zone.style.userSelect = "none"; kick();
+    };
+    const onDrag = (e: PointerEvent) => {
+      if (!spin.dragging) return;
+      const dx = e.clientX - spin.lastX, dy = e.clientY - spin.lastY;
+      spin.lastX = e.clientX; spin.lastY = e.clientY;
+      spin.x += dx * 0.3; spin.vx = dx * 0.3;
+      spin.y = Math.max(-45, Math.min(45, spin.y + dy * 0.25));
+      kick();
+    };
+    const onUp = () => {
+      if (!spin.dragging) return;
+      spin.dragging = false; zone.style.cursor = fine ? "grab" : ""; zone.style.userSelect = ""; kick();
+    };
+    zone.addEventListener("pointerdown", onDown);
+    window.addEventListener("pointermove", onDrag);
+    window.addEventListener("pointerup", onUp);
 
     const io = new IntersectionObserver(([en]) => { visible = en.isIntersecting; if (visible) kick(); });
     io.observe(canvas);
@@ -144,6 +171,10 @@ export function Globe({ stops }: { stops: Stop[] }) {
       io.disconnect();
       ro.disconnect();
       window.removeEventListener("pointermove", onMove);
+      zone.removeEventListener("pointerdown", onDown);
+      window.removeEventListener("pointermove", onDrag);
+      window.removeEventListener("pointerup", onUp);
+      zone.style.cursor = "";
     };
   }, [stops]);
 

@@ -44,6 +44,7 @@ export function Timeline({ entries }: { entries: Entry[] }) {
                 </span>
                 <span className={`mt-4 grid size-9 shrink-0 place-items-center border hairline text-lg transition-transform duration-500 ${isOpen ? "rotate-45 border-orange text-orange" : "text-muted"}`} aria-hidden>+</span>
               </button>
+              <Link href={`/work/${e.slug}`} className="link-draw mt-4 inline-block text-sm text-text">Read the full story →</Link>
               <AnimatePresence initial={false}>
                 {isOpen && (
                   <motion.div
@@ -69,7 +70,6 @@ export function Timeline({ entries }: { entries: Entry[] }) {
                         )}
                       </div>
                     </div>
-                    <Link href={`/work/${e.slug}`} className="t-meta link-draw mt-8 inline-block text-text">Read the full story →</Link>
                   </motion.div>
                 )}
               </AnimatePresence>

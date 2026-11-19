@@ -2,7 +2,6 @@
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
 import { Globe } from "./Globe";
-import { formatCoord } from "@/lib/utils";
 
 type Stop = { id: string; city: string; country: string; lat: number; lon: number };
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -14,7 +13,6 @@ export function Hero({ headline, subline, stops }: { headline: string; subline: 
   const globeY = useTransform(scrollYProgress, [0, 1], ["0%", reduce ? "0%" : "18%"]);
   const textY = useTransform(scrollYProgress, [0, 1], ["0%", reduce ? "0%" : "-12%"]);
   const fade = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
-  const first = stops[0], last = stops[stops.length - 1];
 
   return (
     <section ref={ref} className="relative min-h-[100svh] overflow-hidden pt-[var(--nav-h)]" aria-labelledby="hero-title">
@@ -27,14 +25,7 @@ export function Hero({ headline, subline, stops }: { headline: string; subline: 
       </motion.div>
 
       <motion.div style={{ y: textY }} className="wrap relative flex min-h-[calc(100svh-var(--nav-h))] flex-col justify-between pb-8 pt-10 md:pt-14">
-        <motion.div
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2, duration: 1 }}
-          className="t-meta flex flex-wrap gap-x-6 gap-y-1"
-        >
-          <span>Personal archive</span>
-          <span className="hidden text-faint sm:inline">—</span>
-          <span>{formatCoord(first.lat, first.lon)} <span className="text-orange">→</span> {formatCoord(last.lat, last.lon)}</span>
-        </motion.div>
+        <span aria-hidden />
 
         <div className="grid-swiss items-end">
           <h1 id="hero-title" className="col-span-4 md:col-span-8 lg:col-span-9">
