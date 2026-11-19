@@ -6,7 +6,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { feature } from "topojson-client";
-import { geoConicConformal, geoGraticule, geoInterpolate, geoPath, type GeoProjection } from "d3-geo";
+import { geoConicConformal, geoGraticule, geoPath, type GeoProjection } from "d3-geo";
 import type { FeatureCollection, Geometry } from "geojson";
 
 type Countries = FeatureCollection<Geometry, { name: string }>;
@@ -49,11 +49,18 @@ export function journeyMap(stops: { id: string; lat: number; lon: number }[]) {
     const [x, y] = projection([s.lon, s.lat])!;
     return { id: s.id, x: +x.toFixed(1), y: +y.toFixed(1) };
   });
-  // Great-circle legs between consecutive stops, sampled into polylines.
-  const legs = stops.slice(1).map((s, i) => {
-    const interp = geoInterpolate([stops[i].lon, stops[i].lat], [s.lon, s.lat]);
-    return Array.from({ length: 49 }, (_, k) => {
-      const [x, y] = projection(interp(k / 48))!;
+  // Hand-drawn legs: a gentle curve between cities (alternating sides), with a
+  // slight wobble so the route looks inked by hand on an old chart.
+  const legs = points.slice(1).map((b, i) => {
+    const a = points[i];
+    const dx = b.x - a.x, dy = b.y - a.y, len = Math.hypot(dx, dy);
+    const nx = -dy / len, ny = dx / len, side = i % 2 ? -1 : 1;
+    const cx = (a.x + b.x) / 2 + nx * len * 0.22 * side, cy = (a.y + b.y) / 2 + ny * len * 0.22 * side;
+    return Array.from({ length: 81 }, (_, k) => {
+      const t = k / 80, u = 1 - t;
+      const w = Math.sin(t * Math.PI) * (Math.sin(t * 17 + i * 2.1) * 2.2 + Math.sin(t * 41 + i) * 0.9);
+      const x = u * u * a.x + 2 * u * t * cx + t * t * b.x + nx * w;
+      const y = u * u * a.y + 2 * u * t * cy + t * t * b.y + ny * w;
       return [+x.toFixed(1), +y.toFixed(1)] as [number, number];
     });
   });

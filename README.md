@@ -225,7 +225,7 @@ The form posts to `/api/contact`, which runs on the server and sends the message
 - **Motion (Framer Motion).** Restrained reveals, the pinned horizontal experience rail, scroll-linked storytelling steps, the lightbox. All motion respects the operating system's *reduce motion* setting. GSAP was not needed.
 - **Maps.** Country outlines from Natural Earth (`world-atlas`), projected with `d3-geo` **at build time** — visitors download finished SVG, not a mapping library. The homepage globe uses the same data on a `<canvas>` and stops animating once it has settled.
 - **Content.** Markdown/MDX + JSON in `content/`, validated by `zod` schemas in `website/src/lib/content.ts`. A typo in a content file produces a clear error message during `npm run dev`/`build` instead of a broken page.
-- **Fonts** (all open-licence, self-hosted by Next.js): Newsreader (serif), Inter Tight (sans), JetBrains Mono (mono), Caveat (handwritten annotations), Noto Naskh Arabic (for العربية).
+- **Fonts** (all open-licence, self-hosted by Next.js): Newsreader (serif), Inter Tight (sans — also used wherever a "mono" style would appear, so nothing reads as code), Caveat (handwritten annotations), Noto Naskh Arabic (for العربية).
 - **Accessibility.** Semantic landmarks, skip link, keyboard-operable map/timeline/lightbox/menu, visible focus states, `aria-live` updates, alt text from content, WCAG-AA text contrast.
 - **SEO.** Per-page titles and descriptions, canonical URLs, Open Graph image, `sitemap.xml`, `robots.txt`, JSON-LD (Person, Article). Demonstration and draft pages are marked `noindex`.
 - **Privacy.** No analytics, cookies or third-party trackers. If you want visitor statistics later, Vercel Web Analytics or Plausible are privacy-friendly options.

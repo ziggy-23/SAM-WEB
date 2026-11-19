@@ -19,8 +19,7 @@ export function MiniFlow({ steps }: { steps: string[] }) {
         <motion.g key={s} initial={{ opacity: 0, y: 6 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.15 + i * 0.35, duration: 0.6 }}>
           <rect x={gap * i + gap / 2 - 8} y={52} width={16} height={16} fill="#111210" stroke={i === 2 ? "#c58b60" : "#8f9a78"} />
           {i === 2 && <rect x={gap * i + gap / 2 - 3} y={57} width={6} height={6} fill="#c58b60" />}
-          <text x={gap * i + gap / 2} y={98} textAnchor="middle" className="fill-muted font-mono" fontSize={11}>{s}</text>
-          <text x={gap * i + gap / 2} y={36} textAnchor="middle" className="fill-faint font-mono" fontSize={10}>{String(i + 1).padStart(2, "0")}</text>
+          <text x={gap * i + gap / 2} y={98} textAnchor="middle" className="fill-muted font-sans" fontSize={12}>{s}</text>
         </motion.g>
       ))}
       {/* a pulse travelling along the line once */}

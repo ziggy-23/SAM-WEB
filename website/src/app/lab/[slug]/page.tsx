@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getExperience, getLabProject, getLabProjects } from "@/lib/content";
 import { Mdx } from "@/lib/mdx";
-import { BeforeAfter, Prompt, Workflow } from "@/components/lab/Workflow";
+import { BeforeAfter, Label, Workflow } from "@/components/lab/Workflow";
 import { Reveal, SplitWords } from "@/components/motion/Reveal";
 import { T } from "@/components/Text";
 
@@ -20,24 +20,24 @@ export default async function LabProjectPage({ params }: { params: Promise<{ slu
   if (!p) notFound();
   const exp = p.relatedExperience ? getExperience(p.relatedExperience) : undefined;
   const meta: [string, React.ReactNode][] = [
-    ["status", <span key="s" className={p.verified ? "text-moss" : "text-orange"}>{p.status ?? (p.verified ? "verified" : "draft")}</span>],
-    ["year", <T key="y">{p.year}</T>],
-    ["context", p.context],
-    ["tools", p.tools.map((t, i) => <span key={i}>{i > 0 && ", "}<T>{t}</T></span>)],
+    ["Status", <span key="s" className={p.verified ? "text-moss" : "text-orange"}>{p.status ?? (p.verified ? "verified" : "draft")}</span>],
+    ["Year", <T key="y">{p.year}</T>],
+    ["Context", p.context],
+    ["Tools", p.tools.map((t, i) => <span key={i}>{i > 0 && ", "}<T>{t}</T></span>)],
   ];
 
   return (
     <div className="-mb-32 min-h-screen bg-ink-2 pb-40 dot-grid">
       <header className="wrap pt-[calc(var(--nav-h)+4rem)] md:pt-[calc(var(--nav-h)+6rem)]">
-        <nav className="t-meta" aria-label="Breadcrumb"><Link href="/lab" className="link-draw">Lab</Link><span className="mx-2 text-faint">/</span>{p.slug}</nav>
+        <nav className="t-meta" aria-label="Breadcrumb"><Link href="/lab" className="link-draw">← The laboratory</Link></nav>
         <h1 className="t-display mt-10 max-w-[14ch] text-[clamp(3rem,8vw,8rem)]"><SplitWords text={p.title} /></h1>
         <Reveal delay={0.3} as="p" className="mt-8 max-w-[52ch] font-serif text-[clamp(1.2rem,1.7vw,1.5rem)] text-muted"><T>{p.summary}</T></Reveal>
 
         <Reveal delay={0.4}>
-          <dl className="mt-12 grid border hairline bg-ink/80 font-mono text-sm md:grid-cols-4">
+          <dl className="mt-12 grid border hairline bg-ink/80 text-sm md:grid-cols-4">
             {meta.map(([k, v]) => (
               <div key={k} className="border-b hairline px-4 py-3 md:border-b-0 md:border-r md:last:border-r-0">
-                <dt className="t-meta text-faint">{k}</dt>
+                <dt className="t-eyebrow">{k}</dt>
                 <dd className="mt-1 text-text">{v}</dd>
               </div>
             ))}
@@ -46,9 +46,9 @@ export default async function LabProjectPage({ params }: { params: Promise<{ slu
       </header>
 
       <section className="wrap mt-20 grid-swiss gap-y-10" aria-label="Problem and motivation">
-        {[["problem.md", p.problem], ["why.md", p.why]].map(([f, v]) => v && (
+        {[["The problem", p.problem], ["Why I built it", p.why]].map(([f, v]) => v && (
           <Reveal key={f} className="col-span-4 md:col-span-4 lg:col-span-5 [&:nth-child(2)]:lg:col-start-7">
-            <Prompt>cat {f}</Prompt>
+            <Label>{f}</Label>
             <p className="mt-4 font-serif text-xl leading-snug"><T>{v}</T></p>
           </Reveal>
         ))}
@@ -56,14 +56,14 @@ export default async function LabProjectPage({ params }: { params: Promise<{ slu
 
       {p.workflow && (
         <section className="wrap mt-20" aria-label="Workflow">
-          <Reveal><Prompt>./workflow --explain</Prompt></Reveal>
+          <Reveal><Label>How it works</Label></Reveal>
           <Reveal className="mt-5"><Workflow steps={p.workflow.steps} illustrative={p.workflow.illustrative} /></Reveal>
         </section>
       )}
 
       {p.metrics.length > 0 && (
         <section className="wrap mt-20" aria-label="Results">
-          <Reveal><Prompt>./measure --before --after</Prompt></Reveal>
+          <Reveal><Label>Results</Label></Reveal>
           <div className="mt-5 grid gap-[var(--gutter)] md:grid-cols-2">
             {p.metrics.map((m) => <Reveal key={m.label}><BeforeAfter metric={m} /></Reveal>)}
           </div>
@@ -72,7 +72,7 @@ export default async function LabProjectPage({ params }: { params: Promise<{ slu
 
       {p.media.length > 0 && (
         <section className="wrap mt-20 space-y-10" aria-label="Media">
-          <Prompt>ls media/</Prompt>
+          <Label>Media</Label>
           {p.media.map((m, i) => (
             <figure key={i}>
               {m.type === "video" ? (
@@ -91,7 +91,7 @@ export default async function LabProjectPage({ params }: { params: Promise<{ slu
 
       <section className="wrap mt-24" aria-label="Write-up">
         <div className="grid-swiss">
-          <div className="prose-sam col-span-4 md:col-span-8 lg:col-span-7 lg:col-start-3 [&_h2]:!font-mono [&_h2]:!normal-case [&_h2]:!tracking-normal [&_h2]:!text-moss [&_h2]:before:content-['##_'] [&_h2]:mt-14">
+          <div className="prose-sam col-span-4 md:col-span-8 lg:col-span-7 lg:col-start-3 [&_h2]:mt-14">
             <Mdx source={p.body} />
           </div>
         </div>

@@ -5,7 +5,6 @@ import { Timeline } from "@/components/work/Timeline";
 import { SectionHead } from "@/components/SectionHead";
 import { Reveal, SplitWords } from "@/components/motion/Reveal";
 import { T } from "@/components/Text";
-import { pad } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Projects & Experience",
@@ -21,7 +20,7 @@ export default function Work() {
   return (
     <div className="wrap pt-[calc(var(--nav-h)+4rem)] md:pt-[calc(var(--nav-h)+7rem)]">
       <header className="grid-swiss gap-y-8 pb-20">
-        <p className="t-eyebrow col-span-4 md:col-span-8 lg:col-span-12"><span className="text-orange">05</span><span className="mx-2 text-faint">/</span>Projects & Experience</p>
+        <p className="t-eyebrow col-span-4 md:col-span-8 lg:col-span-12">Projects & Experience</p>
         <h1 className="t-display col-span-4 text-[clamp(3.5rem,9vw,9rem)] md:col-span-8 lg:col-span-9">
           <SplitWords text="More than two pages." />
         </h1>
@@ -42,7 +41,7 @@ export default function Work() {
           {projects.map((p, i) => (
             <Reveal key={p.slug} delay={(i % 3) * 0.1}>
               <Link href={`/work/projects/${p.slug}`} className="group block border-t hairline pt-5">
-                <p className="t-meta flex justify-between"><span className="text-orange">{pad(i + 1)}</span><span>{p.kind}</span></p>
+                <p className="t-meta">{p.kind}</p>
                 <h3 className="t-headline mt-8 text-[2.1rem] transition-colors group-hover:text-beige"><T>{p.title}</T></h3>
                 <p className="mt-3 text-sm text-muted"><T>{p.summary}</T></p>
                 <p className="t-meta mt-6"><T>{p.year}</T></p>

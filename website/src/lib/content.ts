@@ -62,7 +62,7 @@ const ProfileSchema = z.object({
   shortIntro: z.string(),
   bio: z.array(z.string()),
   focusAreas: z.array(z.string()),
-  interests: z.array(z.object({ label: z.string(), note: z.string().optional() })),
+  interests: z.array(z.object({ label: z.string(), note: z.string().optional(), icon: z.string().optional() })),
   languages: z.array(
     z.object({
       name: z.string(), native: z.string(), dir: z.enum(["ltr", "rtl"]).optional(),

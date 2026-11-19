@@ -25,44 +25,54 @@
   ],
   "interests": [
     {
-      "label": "International Relations & Diplomacy",
-      "note": "I am fascinated by the invisible architecture of international affairs: the negotiations, alliances, institutions, competing interests and historical forces that shape how countries interact — and how decisions made in one corner of the world reverberate across another."
+      "label": "Diplomacy & International Relations",
+      "note": "I am fascinated by the invisible architecture of international affairs: the negotiations, alliances, institutions, competing interests and historical forces that shape how countries interact — and how decisions made in one corner of the world reverberate across another.",
+      "icon": "flag"
     },
     {
       "label": "Political Economy",
-      "note": "I enjoy exploring the relationship between politics and economics, particularly how trade, investment, financial systems, resources and commercial geography influence the distribution of power between states."
+      "note": "I enjoy exploring the relationship between politics and economics, particularly how trade, investment, financial systems, resources and commercial geography influence the distribution of power between states.",
+      "icon": "scale"
     },
     {
       "label": "Research & Writing",
-      "note": "There is something deeply satisfying about starting with a question, getting lost in documents, reports, interviews and conflicting accounts, and eventually bringing the scattered pieces together into a coherent story."
+      "note": "There is something deeply satisfying about starting with a question, getting lost in documents, reports, interviews and conflicting accounts, and eventually bringing the scattered pieces together into a coherent story.",
+      "icon": "pencil"
     },
     {
       "label": "Data, Technology & AI",
-      "note": "I am interested in what emerges when analytical thinking meets technology — using data, AI and automation to simplify complex processes, uncover patterns and turn ideas into practical tools."
+      "note": "I am interested in what emerges when analytical thinking meets technology — using data, AI and automation to simplify complex processes, uncover patterns and turn ideas into practical tools.",
+      "icon": "data"
     },
     {
       "label": "Photography",
-      "note": "Photography is my way of paying attention: an attempt to preserve the atmosphere of a place, the character of a street, the architecture of a city or a fleeting moment that might otherwise disappear."
+      "note": "Photography is my way of paying attention: an attempt to preserve the atmosphere of a place, the character of a street, the architecture of a city or a fleeting moment that might otherwise disappear.",
+      "icon": "camera"
     },
     {
       "label": "Running",
-      "note": "Running has taught me the relationship between discipline, patience and progress — and that some of the most rewarding distances are the ones you initially thought were beyond your reach."
+      "note": "Running has taught me the relationship between discipline, patience and progress — and that some of the most rewarding distances are the ones you initially thought were beyond your reach.",
+      "icon": "runner"
     },
     {
       "label": "Football",
-      "note": "Having played as a goalkeeper and captained a team, I see football as more than a game: an exercise in anticipation, responsibility, communication and learning to trust the people around you."
+      "note": "Having played as a goalkeeper and captained a team, I see football as more than a game: an exercise in anticipation, responsibility, communication and learning to trust the people around you.",
+      "icon": "ball"
     },
     {
       "label": "Music & Drums",
-      "note": "Playing drums and writing music have given me another language to express myself — one built around rhythm, collaboration, creativity and the occasional freedom of making an awful lot of noise."
+      "note": "Playing drums and writing music have given me another language to express myself — one built around rhythm, collaboration, creativity and the occasional freedom of making an awful lot of noise.",
+      "icon": "drums"
     },
     {
       "label": "Languages & Cultures",
-      "note": "I enjoy learning languages not simply as a means of communication, but as a way of getting closer to how people think, express themselves and understand the world around them."
+      "note": "I enjoy learning languages not simply as a means of communication, but as a way of getting closer to how people think, express themselves and understand the world around them.",
+      "icon": "globe"
     },
     {
       "label": "Cooking",
-      "note": "Cooking is one of my favourite forms of experimentation: creativity, curiosity and technique — and the pleasure of bringing people together around a table."
+      "note": "Cooking is one of my favourite forms of experimentation: creativity, curiosity and technique — and the pleasure of bringing people together around a table.",
+      "icon": "pan"
     }
   ],
   "languages": [

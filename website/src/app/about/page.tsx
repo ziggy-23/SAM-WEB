@@ -11,7 +11,6 @@ import { T } from "@/components/Text";
 import { SectionHead } from "@/components/SectionHead";
 import { JsonLd, personLd } from "@/components/JsonLd";
 import { Portrait } from "@/components/Portrait";
-import { formatCoord } from "@/lib/utils";
 
 const arabic = Noto_Naskh_Arabic({ subsets: ["arabic"], weight: ["400"], preload: false, display: "swap" });
 
@@ -32,7 +31,7 @@ export default function About() {
       <JsonLd data={personLd(p)} />
       {/* Opening */}
       <header className="wrap pt-[calc(var(--nav-h)+4rem)] md:pt-[calc(var(--nav-h)+7rem)]">
-        <p className="t-eyebrow"><span className="text-orange">01</span><span className="mx-2 text-faint">/</span>About</p>
+        <p className="t-eyebrow">About</p>
         <div className="grid-swiss mt-10 gap-y-10">
           <h1 className="t-display col-span-4 text-[clamp(4rem,12vw,12.5rem)] md:col-span-8 lg:col-span-9">
             <SplitWords text="Hello, I'm Sam." />
@@ -95,7 +94,7 @@ export default function About() {
           {stops.map((st, i) => (
             <Reveal as="li" key={st.id} className="grid-swiss items-start gap-y-4 border-b hairline py-12 md:py-16">
               <div className={`col-span-4 md:col-span-3 lg:col-span-4 ${i % 2 ? "lg:col-start-2" : ""}`}>
-                <p className="t-meta"><span className="text-orange">{String(i + 1).padStart(2, "0")}</span> · {formatCoord(st.lat, st.lon)}</p>
+                <p className="t-eyebrow">{st.country}</p>
                 <h3 className="t-display mt-4 text-[clamp(3rem,6vw,5.5rem)]">{st.city}</h3>
                 {st.title && <p className="mt-2 font-serif text-xl italic text-beige">{st.title}</p>}
               </div>
@@ -133,9 +132,9 @@ export default function About() {
       {/* Interests */}
       <section className="wrap mt-32 md:mt-48" aria-label="Beyond the CV">
         <div className="border-t hairline pt-5">
-          <p className="t-eyebrow"><span className="text-orange">E</span><span className="mx-2 text-faint">/</span>Interests</p>
-          <h2 className="mt-8 text-[clamp(3rem,9vw,8.5rem)] font-semibold uppercase leading-[0.9] tracking-[-0.03em]">Beyond the CV</h2>
-          <p className="t-meta mt-4">Pick one ↓</p>
+          <p className="t-eyebrow">Interests</p>
+          <h2 className="t-display mt-8 text-[clamp(3rem,8vw,7.5rem)] uppercase tracking-[0.01em]">Beyond the CV</h2>
+          <p className="t-meta mt-5 italic">Choose one to read more.</p>
         </div>
         <div className="mt-10">
           <Interests items={p.interests} />

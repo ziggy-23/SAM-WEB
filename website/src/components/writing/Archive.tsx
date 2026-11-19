@@ -3,7 +3,7 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useMemo, useState } from "react";
 import { T } from "../Text";
-import { formatDate, pad } from "@/lib/utils";
+import { formatDate } from "@/lib/utils";
 
 export type ArchiveItem = {
   slug: string; title: string; subtitle?: string; date: string; type: string; category: string;
@@ -116,8 +116,7 @@ export function Archive({ items, categories, types }: { items: ArchiveItem[]; ca
             {results.map((w, i) => (
               <motion.li key={w.slug} layout initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.35 }}>
                 <Link href={`/writing/${w.slug}`} className="group grid grid-cols-12 gap-x-[var(--gutter)] gap-y-2 border-t hairline py-7 transition-colors hover:bg-ink-2/60">
-                  <span className="col-span-2 font-mono text-xs text-faint md:col-span-1">{pad(i + 1)}</span>
-                  <div className="col-span-10 md:col-span-8">
+                  <div className="col-span-12 md:col-span-9">
                     <p className="t-meta flex flex-wrap gap-x-3">
                       <span className="text-orange">{types[w.type] ?? w.type}</span>
                       <span>{w.category}</span>
@@ -127,7 +126,7 @@ export function Archive({ items, categories, types }: { items: ArchiveItem[]; ca
                     <h3 className="t-headline mt-3 text-[clamp(1.75rem,3vw,2.75rem)] transition-colors group-hover:text-beige"><T>{w.title}</T></h3>
                     {w.subtitle && <p className="mt-2 max-w-[60ch] font-serif text-lg text-muted"><T>{w.subtitle}</T></p>}
                   </div>
-                  <div className="col-span-10 col-start-3 flex items-end justify-between md:col-span-3 md:col-start-auto md:flex-col md:items-end">
+                  <div className="col-span-12 flex items-end justify-between md:col-span-3 md:flex-col md:items-end">
                     <span className="t-meta">{formatDate(w.date)}</span>
                     <span className="t-meta">{w.readingMinutes} min</span>
                   </div>

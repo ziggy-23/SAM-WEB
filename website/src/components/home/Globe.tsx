@@ -94,7 +94,7 @@ export function Globe({ stops }: { stops: Stop[] }) {
       }
 
       // Cities
-      ctx.font = `500 ${Math.max(9, size / 70)}px ${getComputedStyle(document.body).getPropertyValue("--font-mono") || "monospace"}`;
+      ctx.font = `italic 400 ${Math.max(11, size / 48)}px ${getComputedStyle(document.body).getPropertyValue("--font-serif") || "serif"}`;
       stops.forEach((s, i) => {
         if (geoDistance([s.lon, s.lat], centre) > 1.45) return;
         const p = projection([s.lon, s.lat]);
@@ -109,7 +109,7 @@ export function Globe({ stops }: { stops: Stop[] }) {
         ctx.fillStyle = "rgba(233,230,222,0.8)";
         const left = s.id === "paris" || s.id === "barcelona";
         ctx.textAlign = left ? "right" : "left";
-        ctx.fillText(s.city.toUpperCase(), p[0] + (left ? -10 : 10), p[1] + 3);
+        ctx.fillText(s.city, p[0] + (left ? -10 : 10), p[1] + 4);
         ctx.globalAlpha = 1;
       });
 

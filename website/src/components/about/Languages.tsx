@@ -1,7 +1,6 @@
 "use client";
 import { motion, useInView } from "motion/react";
 import { useRef } from "react";
-import { pad } from "@/lib/utils";
 
 type Lang = { name: string; native: string; dir?: "ltr" | "rtl"; level: string | null; percent?: number };
 
@@ -29,33 +28,31 @@ export function Languages({ items, arabicClass }: { items: Lang[]; arabicClass: 
         const isAr = l.dir === "rtl";
         return (
           <li key={l.name} className="group grid-swiss items-center gap-y-3 border-t hairline py-5 md:py-6">
-            <span className="col-span-1 font-mono text-xs text-faint">{pad(i + 1)}</span>
             <span lang={isAr ? "ar" : undefined} dir={l.dir}
-              className={`col-span-3 text-left text-[clamp(2.2rem,5vw,4.5rem)] leading-none transition-colors group-hover:text-beige md:col-span-4 lg:col-span-5 ${isAr ? arabicClass : "t-headline"}`}>
+              className={`col-span-4 text-left text-[clamp(2.2rem,5vw,4.5rem)] leading-none transition-colors group-hover:text-beige md:col-span-4 lg:col-span-6 ${isAr ? arabicClass : "t-headline"}`}>
               {l.native}
             </span>
             <span className="col-span-4 flex items-baseline justify-between gap-3 md:col-span-3 md:block lg:col-span-2">
               <span className="block text-sm text-text">{l.name}</span>
               <span className="t-meta block">{l.level ?? "—"}</span>
             </span>
-            <span className="col-span-4 flex items-center gap-4 md:col-span-8 md:col-start-2 lg:col-span-4 lg:col-start-9">
+            <span className="col-span-4 flex items-center gap-4 md:col-span-8 lg:col-span-4 lg:col-start-9">
               {l.percent !== undefined && <><Bar percent={l.percent} delay={0.1 + i * 0.08} /><span className="t-meta w-10 shrink-0 text-right">{l.percent}%</span></>}
             </span>
           </li>
         );
       })}
       <li className="grid-swiss items-center gap-y-3 border-t hairline py-5 md:py-6">
-        <span className="col-span-1 font-mono text-xs text-faint">{pad(items.length + 1)}</span>
-        <span className="t-headline col-span-3 text-[clamp(2.2rem,5vw,4.5rem)] leading-none text-faint md:col-span-4 lg:col-span-5">More to come</span>
+        <span className="t-headline col-span-4 text-[clamp(2.2rem,5vw,4.5rem)] leading-none text-faint md:col-span-4 lg:col-span-6">More to come</span>
         <span className="col-span-4 md:col-span-3 lg:col-span-2">
           <span className="block text-sm text-muted">Next language</span>
-          <span className="t-meta block">loading…</span>
+          <span className="t-meta block italic">in progress</span>
         </span>
-        <span className="col-span-4 flex items-center gap-4 md:col-span-8 md:col-start-2 lg:col-span-4 lg:col-start-9">
+        <span className="col-span-4 flex items-center gap-4 md:col-span-8 lg:col-span-4 lg:col-start-9">
           <span className="relative h-[5px] w-full overflow-hidden bg-ink-3" role="progressbar" aria-label="More languages to be learned" aria-busy="true">
             <span className="loading-sweep absolute inset-y-0 w-1/4 bg-gradient-to-r from-transparent via-orange to-transparent" />
           </span>
-          <span className="t-meta w-10 shrink-0 text-right">…</span>
+          <span className="t-meta w-10 shrink-0" />
         </span>
       </li>
     </ul>

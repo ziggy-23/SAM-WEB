@@ -16,7 +16,7 @@ export default function Contact() {
   const email = isPlaceholder(contact.email) ? undefined : contact.email;
   return (
     <div className="wrap pt-[calc(var(--nav-h)+4rem)] md:pt-[calc(var(--nav-h)+7rem)]">
-      <p className="t-eyebrow"><span className="text-orange">06</span><span className="mx-2 text-faint">/</span>Contact</p>
+      <p className="t-eyebrow">Contact</p>
       <h1 className="t-display mt-8 text-[clamp(4rem,13vw,13rem)]"><SplitWords text="Say hello." /></h1>
       <div className="grid-swiss mt-16 gap-y-16 md:mt-24">
         <Reveal className="col-span-4 md:col-span-8 lg:col-span-4">

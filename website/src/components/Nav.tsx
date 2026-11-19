@@ -18,6 +18,8 @@ export function Nav() {
   const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [hover, setHover] = useState(false);
+  const faded = hidden && !hover && !open;
   const { scrollY } = useScroll();
   const menuBtn = useRef<HTMLButtonElement>(null);
   const firstLink = useRef<HTMLAnchorElement>(null);
@@ -52,15 +54,20 @@ export function Nav() {
 
   return (
     <>
-      <motion.header
-        initial={false}
-        animate={{ y: hidden ? "-100%" : "0%" }}
-        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${
-          scrolled || open ? "border-b hairline bg-ink/92" : "border-b border-transparent"
+      {/* The bar never moves. Scrolling down fades its contents away, leaving a clear pane of glass;
+          scrolling up (or hovering, or tabbing into it) brings them back. */}
+      <header
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+        onFocusCapture={() => setHover(true)}
+        onBlurCapture={() => setHover(false)}
+        className={`fixed inset-x-0 top-0 z-50 border-b backdrop-blur-md transition-[background-color,border-color] duration-700 ease-out ${
+          !scrolled && !open ? "border-transparent bg-transparent backdrop-blur-none"
+          : faded ? "border-line bg-ink/10"
+          : "border-line bg-ink/80"
         }`}
       >
-        <nav aria-label="Primary" className="wrap flex h-[var(--nav-h)] items-center justify-between">
+        <nav aria-label="Primary" className={`wrap flex h-[var(--nav-h)] items-center justify-between transition-opacity duration-700 ease-out ${faded ? "pointer-events-none opacity-0" : "opacity-100"}`}>
           <Link href="/" className="text-[1.375rem] leading-none" aria-label="SAM — home">
             <Wordmark />
           </Link>
@@ -77,7 +84,6 @@ export function Nav() {
                       active ? "text-text" : "text-muted hover:text-text"
                     }`}
                   >
-                    <span className="font-mono text-[0.625rem] text-faint transition-colors group-hover:text-orange">{item.index}</span>
                     {item.label}
                     {active && (
                       <motion.span
@@ -107,7 +113,7 @@ export function Nav() {
             </span>
           </button>
         </nav>
-      </motion.header>
+      </header>
 
       <AnimatePresence>
         {open && (
@@ -138,7 +144,6 @@ export function Nav() {
                     className="flex items-baseline justify-between py-4"
                   >
                     <span className="t-headline text-[2.4rem]">{item.label}</span>
-                    <span className="font-mono text-xs text-orange">{item.index}</span>
                   </Link>
                 </motion.li>
               ))}

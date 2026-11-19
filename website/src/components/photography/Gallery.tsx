@@ -5,7 +5,6 @@ import type { Collection, Photo } from "@/lib/content";
 import { PhotoFrame, aspectToRatio } from "../PhotoFrame";
 import { Lightbox } from "./Lightbox";
 import { T } from "../Text";
-import { pad } from "@/lib/utils";
 
 type Block =
   | { kind: "bleed"; items: number[] }
@@ -40,7 +39,6 @@ function Caption({ p, n }: { p: Photo; n: number }) {
   const meta = [p.location, p.date].filter(Boolean).join(" · ");
   return (
     <div className="mt-3 flex gap-4">
-      <span className="font-mono text-[0.65rem] text-faint">{pad(n)}</span>
       <div>
         {p.title && <p className="text-sm text-text/90"><T>{p.title}</T></p>}
         {p.caption && <p className="mt-1 max-w-[46ch] font-serif text-[0.95rem] italic text-muted"><T>{p.caption}</T></p>}

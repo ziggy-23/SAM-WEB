@@ -6,7 +6,6 @@ import { createPortal } from "react-dom";
 import type { Photo } from "@/lib/content";
 import { PhotoFrame, aspectToRatio } from "../PhotoFrame";
 import { T } from "../Text";
-import { pad } from "@/lib/utils";
 
 /** Fullscreen viewer: ← → to navigate, Esc to close, swipe on touch screens. */
 export function Lightbox({ photos, index, onClose, onIndex }: { photos: Photo[]; index: number; onClose: () => void; onIndex: (i: number) => void }) {
@@ -55,7 +54,7 @@ export function Lightbox({ photos, index, onClose, onIndex }: { photos: Photo[];
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}
     >
       <div className="wrap flex h-16 shrink-0 items-center justify-between t-meta">
-        <span><span className="text-text">{pad(index + 1)}</span> / {pad(photos.length)}</span>
+        <span>{index + 1} of {photos.length}</span>
         <button type="button" onClick={onClose} className="link-draw text-text">Close (Esc)</button>
       </div>
 

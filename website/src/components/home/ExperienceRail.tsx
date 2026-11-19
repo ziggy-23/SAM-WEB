@@ -3,7 +3,6 @@ import Link from "next/link";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { T } from "../Text";
-import { pad } from "@/lib/utils";
 
 type Item = { slug: string; organisation: string; role: string; location: string; start: string; end: string; summary: string };
 
@@ -14,8 +13,7 @@ function Card({ e, i }: { e: Item; i: number }) {
       className="group relative flex h-full w-[78vw] shrink-0 snap-start flex-col justify-between border-l hairline py-2 pl-6 pr-4 md:w-[44vw] lg:w-[30vw]"
     >
       <div>
-        <p className="font-mono text-xs text-orange">{pad(i + 1)}</p>
-        <h3 className="t-headline mt-10 text-[clamp(2rem,3.2vw,3.25rem)] transition-colors group-hover:text-beige">{e.organisation}</h3>
+        <h3 className="t-headline mt-4 text-[clamp(2rem,3.2vw,3.25rem)] transition-colors group-hover:text-beige">{e.organisation}</h3>
         <p className="mt-3 text-[0.95rem] text-text/90"><T>{e.role}</T></p>
       </div>
       <div className="mt-12 space-y-3">

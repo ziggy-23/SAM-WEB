@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Newsreader, Inter_Tight, JetBrains_Mono, Caveat } from "next/font/google";
+import { Newsreader, Inter_Tight, Caveat } from "next/font/google";
 import "./globals.css";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
@@ -10,7 +10,6 @@ import { SITE_URL } from "@/lib/utils";
 
 const serif = Newsreader({ subsets: ["latin"], variable: "--font-newsreader", style: ["normal", "italic"], axes: ["opsz"], display: "swap" });
 const sans = Inter_Tight({ subsets: ["latin"], variable: "--font-inter-tight", display: "swap" });
-const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains", display: "swap" });
 const hand = Caveat({ subsets: ["latin"], variable: "--font-caveat", display: "swap" });
 
 const site = getSite();
@@ -28,7 +27,7 @@ export const viewport: Viewport = { themeColor: "#111210", colorScheme: "dark" }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${serif.variable} ${sans.variable} ${mono.variable} ${hand.variable}`}>
+    <html lang="en" className={`${serif.variable} ${sans.variable} ${hand.variable}`}>
       <body>
         <a
           href="#main"

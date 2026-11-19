@@ -3,7 +3,6 @@ import Link from "next/link";
 import { AnimatePresence, motion, useScroll, useSpring } from "motion/react";
 import { useRef, useState } from "react";
 import { T } from "../Text";
-import { pad } from "@/lib/utils";
 
 type Entry = {
   slug: string; organisation: string; role: string; location: string; start: string; end: string;
@@ -39,8 +38,7 @@ export function Timeline({ entries }: { entries: Entry[] }) {
                 className="group flex w-full items-start justify-between gap-6 text-left"
               >
                 <span>
-                  <span className="block font-mono text-xs text-orange">{pad(entries.length - i)}</span>
-                  <span className="t-headline mt-2 block text-[clamp(2rem,4.2vw,4rem)] transition-colors group-hover:text-beige">{e.organisation}</span>
+                  <span className="t-headline block text-[clamp(2rem,4.2vw,4rem)] transition-colors group-hover:text-beige">{e.organisation}</span>
                   <span className="mt-2 block text-lg text-text/90"><T>{e.role}</T></span>
                   <span className="t-meta mt-2 block"><T>{e.location}</T><span className="md:hidden"> · <T>{e.start}</T> – <T>{e.end}</T></span></span>
                 </span>

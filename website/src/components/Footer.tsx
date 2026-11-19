@@ -12,7 +12,7 @@ export function Footer() {
       <div className="wrap grid-swiss gap-y-10 py-14">
         <div className="col-span-4 md:col-span-4">
           <p className="t-display text-[clamp(4.5rem,11vw,9rem)] text-text/90">SAM</p>
-          <p className="t-meta mt-4 max-w-xs">A personal archive of ideas, experiences, research, projects and visual observations.</p>
+          <p className="mt-4 max-w-xs font-serif text-lg italic leading-snug text-muted">A personal archive of ideas, experiences, research, projects and visual observations.</p>
         </div>
         <nav aria-label="Footer" className="col-span-2 md:col-span-2 lg:col-start-7">
           <p className="t-eyebrow mb-4">Index</p>
@@ -34,7 +34,7 @@ export function Footer() {
       </div>
       <div className="wrap flex flex-wrap items-center justify-between gap-4 border-t hairline py-6 t-meta">
         <span>© {year} Houssam Mehfara</span>
-        <span className="hidden md:inline">No ads. No trackers. Press <kbd className="rounded-sm border hairline px-1">G</kbd> to see the grid.</span>
+        <span className="hidden md:inline">No ads. No trackers.</span>
         <a href="#main" className="link-draw">Back to top ↑</a>
       </div>
     </footer>

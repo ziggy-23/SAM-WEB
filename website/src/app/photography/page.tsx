@@ -15,7 +15,7 @@ export default function Photography() {
   return (
     <div className="-mb-32 bg-void pb-40">
       <header className="wrap grid-swiss gap-y-8 pb-16 pt-[calc(var(--nav-h)+4rem)] md:pb-24 md:pt-[calc(var(--nav-h)+8rem)]">
-        <p className="t-eyebrow col-span-4 md:col-span-8 lg:col-span-12"><span className="text-orange">03</span><span className="mx-2 text-faint">/</span>Photography</p>
+        <p className="t-eyebrow col-span-4 md:col-span-8 lg:col-span-12">Photography</p>
         <h1 className="t-display col-span-4 text-[clamp(3.75rem,11vw,12rem)] italic md:col-span-8 lg:col-span-10">
           <SplitWords text="Things seen along the way." stagger={0.07} />
         </h1>

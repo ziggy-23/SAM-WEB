@@ -2,7 +2,7 @@
 import { AnimatePresence, motion, useInView, useReducedMotion } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { T } from "../Text";
-import { formatCoord, pad } from "@/lib/utils";
+
 
 type Stop = { id: string; city: string; country: string; lat: number; lon: number; title?: string; description: string };
 type MapData = {
@@ -14,7 +14,7 @@ type MapData = {
   seas: { name: string; at: [number, number] }[];
 };
 
-const LEG_MS = 1900;
+const LEG_MS = 2600;
 const DWELL_MS = 2600;
 
 function pointOnPolyline(pts: [number, number][], t: number): [number, number] {
@@ -32,7 +32,8 @@ function partial(pts: [number, number][], t: number): [number, number][] {
   const i = Math.floor(f);
   return [...pts.slice(0, i + 1), pointOnPolyline(pts, t)];
 }
-const DOTS = { stroke: "#c58b60", strokeWidth: 2.6, strokeLinecap: "round" as const, strokeDasharray: "0.1 7", fill: "none" };
+// Irregular, hand-inked dashes — like a route on an old sea chart.
+const DOTS = { stroke: "#c9a27a", strokeWidth: 1.9, strokeLinecap: "round" as const, strokeDasharray: "7 6 3 7 10 5 2 8 6 6 4 9", fill: "none" };
 
 /**
  * An animated map of the places that shaped the biography.
@@ -103,24 +104,24 @@ export function JourneyMap({ stops, map }: { stops: Stop[]; map: MapData }) {
 
   return (
     <div ref={wrap} className="relative">
-      <div className="relative overflow-hidden border hairline bg-[#0e0f0d]">
+      <div className="relative overflow-hidden border hairline bg-[#100f0c]">
         <svg viewBox={`0 0 ${map.width} ${map.height}`} className="block h-auto w-full" role="img" aria-labelledby="journey-title journey-desc">
           <title id="journey-title">{`Map of places: ${stops.map((s) => s.city).join(", ")}`}</title>
           <desc id="journey-desc">A point travels between the cities on a map of the Mediterranean and the Middle East. Use the city buttons below the map to explore each place.</desc>
           <defs>
             <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
-              <stop offset="60%" stopColor="#0e0f0d" stopOpacity="0" />
-              <stop offset="100%" stopColor="#0e0f0d" stopOpacity="0.85" />
+              <stop offset="55%" stopColor="#100f0c" stopOpacity="0" />
+              <stop offset="100%" stopColor="#100f0c" stopOpacity="0.9" />
             </radialGradient>
           </defs>
-          <path d={map.graticule} fill="none" stroke="rgba(233,230,222,0.045)" strokeWidth={0.6} />
+          <path d={map.graticule} fill="none" stroke="rgba(216,200,170,0.05)" strokeWidth={0.6} strokeDasharray="2 4" />
           <g>
             {map.shapes.map((s) => (
-              <path key={s.name} d={s.d} fill="#1d1e1a" stroke="rgba(233,230,222,0.13)" strokeWidth={0.5} strokeLinejoin="round" />
+              <path key={s.name} d={s.d} fill="#201d17" stroke="rgba(216,200,170,0.16)" strokeWidth={0.6} strokeLinejoin="round" />
             ))}
           </g>
           {map.seas.map((s) => (
-            <text key={s.name} x={s.at[0]} y={s.at[1]} textAnchor="middle" className="fill-stone/50 font-serif italic" fontSize={14} letterSpacing={2}>{s.name}</text>
+            <text key={s.name} x={s.at[0]} y={s.at[1]} textAnchor="middle" className="fill-[#8f8572]/60 font-serif italic" fontSize={16} letterSpacing={3}>{s.name}</text>
           ))}
           {/* The leg just completed fades away while the next one is drawn. */}
           {travel && travel.leg > 0 && (
@@ -142,38 +143,46 @@ export function JourneyMap({ stops, map }: { stops: Stop[]; map: MapData }) {
             return (
               <g key={p.id} className="cursor-pointer" onMouseEnter={() => setHover(i)} onMouseLeave={() => setHover(null)} onClick={() => select(i)} aria-hidden>
                 <circle cx={p.x} cy={p.y} r={22} fill="transparent" />
-                <circle cx={p.x} cy={p.y} r={on ? 11 : 7} fill="none" stroke="#c58b60" strokeOpacity={on ? 0.6 : reached ? 0.3 : 0.12} style={{ transition: "all .5s" }} />
-                <circle cx={p.x} cy={p.y} r={3} fill={reached ? "#c58b60" : "#6f6d65"} />
-                <text x={p.x + (left ? -16 : 16)} y={p.y + 4} textAnchor={left ? "end" : "start"} fontSize={13} letterSpacing={1.5}
-                  className={`font-mono uppercase transition-[fill] duration-500 ${on ? "fill-text" : reached ? "fill-muted" : "fill-faint"}`}>
+                <circle cx={p.x} cy={p.y} r={on ? 11 : 7} fill="none" stroke="#c9a27a" strokeOpacity={on ? 0.5 : reached ? 0.25 : 0.1} style={{ transition: "all .5s" }} />
+                <circle cx={p.x} cy={p.y} r={3} fill={reached ? "#c9a27a" : "#6f6d65"} />
+                <text x={p.x + (left ? -14 : 14)} y={p.y + 6} textAnchor={left ? "end" : "start"} fontSize={21}
+                  className={`font-serif italic transition-[fill] duration-500 ${on ? "fill-text" : reached ? "fill-beige/70" : "fill-stone/70"}`}>
                   {s.city}
                 </text>
               </g>
             );
           })}
-          {/* Landing: the city ripples. */}
-          {!travel && arrivals > 0 && [0, 0.25, 0.5].map((d) => (
-            <motion.circle key={`ripple-${arrivals}-${d}`} cx={map.points[active].x} cy={map.points[active].y} fill="none" stroke="#c58b60"
-              initial={{ r: 4, opacity: 0.9, strokeWidth: 2 }} animate={{ r: 48, opacity: 0, strokeWidth: 0.5 }}
-              transition={{ duration: 1.6, delay: d, ease: [0.16, 1, 0.3, 1] }} />
-          ))}
+          {/* Landing: an inked X, and a soft ripple through the ink. */}
+          {!travel && arrivals > 0 && (
+            <g key={`land-${arrivals}`}>
+              {[0, 0.3].map((d) => (
+                <motion.circle key={d} cx={map.points[active].x} cy={map.points[active].y} fill="none" stroke="#c9a27a"
+                  initial={{ r: 5, opacity: 0.7, strokeWidth: 1.4 }} animate={{ r: 40, opacity: 0, strokeWidth: 0.4 }}
+                  transition={{ duration: 2.2, delay: d, ease: [0.16, 1, 0.3, 1] }} />
+              ))}
+              {[[-9, -8, 8, 9], [8, -9, -8, 8]].map(([x1, y1, x2, y2], k) => (
+                <motion.path key={k} d={`M${map.points[active].x + x1},${map.points[active].y + y1} q ${(x2 - x1) / 2 + 2},${(y2 - y1) / 2 - 1} ${x2 - x1},${y2 - y1}`}
+                  fill="none" stroke="#c9a27a" strokeWidth={2} strokeLinecap="round"
+                  initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.35, delay: 0.15 + k * 0.3 }} />
+              ))}
+            </g>
+          )}
           {/* the traveller */}
           <g transform={`translate(${dot[0]},${dot[1]})`} aria-hidden>
             <motion.g key={`boom-${arrivals}`} initial={{ scale: travel ? 1 : 1.9 }} animate={{ scale: 1 }} transition={{ type: "spring", stiffness: 300, damping: 12 }}>
               <circle r={9} fill="#c58b60" opacity={0.18} />
-              <circle r={4} fill="#e9e6de" />
+              <circle r={3.5} fill="#e9dcc4" />
             </motion.g>
+          </g>
+          {/* A faint compass rose, as on old charts. */}
+          <g transform={`translate(${map.width - 92},${map.height - 96})`} stroke="#c9a27a" strokeOpacity={0.28} fill="none" strokeWidth={1} aria-hidden>
+            <circle r={34} strokeDasharray="2 3" />
+            <circle r={24} />
+            <path d="M0,-46 L5,-5 L0,0 L-5,-5 Z M0,46 L5,5 L0,0 L-5,5 Z M-46,0 L-5,-5 L0,0 L-5,5 Z M46,0 L5,-5 L0,0 L5,5 Z" fill="#c9a27a" fillOpacity={0.08} />
+            <text y={-52} textAnchor="middle" fontSize={13} className="fill-[#c9a27a]/40 font-serif italic" stroke="none">N</text>
           </g>
           <rect width={map.width} height={map.height} fill="url(#vignette)" pointerEvents="none" />
         </svg>
-
-        {/* corner metadata, satellite style */}
-        <div className="pointer-events-none absolute left-3 top-3 font-mono text-[0.6rem] uppercase tracking-[0.14em] text-faint md:left-5 md:top-4">
-          Conic conformal · Natural Earth 1:50m
-        </div>
-        <div className="pointer-events-none absolute right-3 top-3 font-mono text-[0.6rem] tracking-[0.1em] text-muted md:right-5 md:top-4">
-          {formatCoord(stop.lat, stop.lon)}
-        </div>
 
         {/* Desktop info card */}
         <div className="absolute bottom-5 left-5 hidden w-[22rem] md:block" aria-live="polite">
@@ -193,16 +202,16 @@ export function JourneyMap({ stops, map }: { stops: Stop[]; map: MapData }) {
             key={s.id} type="button" aria-pressed={i === active}
             onClick={() => select(i)} onMouseEnter={() => setHover(i)} onMouseLeave={() => setHover(null)}
             onFocus={() => setHover(i)} onBlur={() => setHover(null)}
-            className={`t-meta border px-3 py-1.5 transition-colors ${i === active ? "border-orange text-text" : "border-line text-muted hover:border-line-2 hover:text-text"}`}
+            className={`border px-3 py-1.5 font-serif text-[0.95rem] italic transition-colors ${i === active ? "border-orange text-text" : "border-line text-muted hover:border-line-2 hover:text-text"}`}
           >
-            <span className="mr-2 text-faint">{pad(i + 1)}</span>{s.city}
+            {s.city}
           </button>
         ))}
-        <button type="button" onClick={playing ? () => setPlaying(false) : replay} className="t-meta ml-auto px-2 py-1.5 text-orange link-draw">
-          {playing ? "Pause" : "↻ Replay journey"}
+        <button type="button" onClick={playing ? () => setPlaying(false) : replay} className="ml-auto px-2 py-1.5 text-sm text-orange link-draw">
+          {playing ? "Pause" : "Replay the journey"}
         </button>
       </div>
-      <p className="t-meta mt-3 text-faint">The sequence is a storytelling device, not a chronology of exact dates or routes.</p>
+      
     </div>
   );
 }
@@ -216,7 +225,7 @@ function StopCard({ stop, index, total }: { stop: Stop; index: number; total: nu
         transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
         className="border hairline bg-ink/90 p-5"
       >
-        <p className="t-meta flex justify-between"><span className="text-orange">{pad(index + 1)} / {pad(total)}</span><span>{stop.country}</span></p>
+        <p className="t-eyebrow">{stop.country}</p>
         <p className="t-headline mt-3 text-4xl">{stop.city}</p>
         {stop.title && <p className="mt-1 font-serif text-lg italic text-beige">{stop.title}</p>}
         <p className="mt-3 text-sm leading-relaxed text-muted"><T>{stop.description}</T></p>

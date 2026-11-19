@@ -11,7 +11,7 @@ import { JsonLd, personLd } from "@/components/JsonLd";
 import {
   getExperiences, getJourney, getLabProjects, getPhotos, getProfile, getProjects, getWritings, getTaxonomy,
 } from "@/lib/content";
-import { formatDate, pad } from "@/lib/utils";
+import { formatDate } from "@/lib/utils";
 
 export default function Home() {
   const profile = getProfile();
@@ -45,7 +45,7 @@ export default function Home() {
             <ul className="divide-y divide-line border-y hairline">
               {profile.focusAreas.map((f, i) => (
                 <li key={f} className="flex items-baseline gap-3 py-2 text-sm text-muted">
-                  <span className="font-mono text-[0.65rem] text-faint">{pad(i + 1)}</span>{f}
+{f}
                 </li>
               ))}
             </ul>
@@ -104,16 +104,16 @@ export default function Home() {
       {lab && (
         <section className="mt-28 border-y hairline bg-ink-2 dot-grid md:mt-40" aria-label="Data and AI">
           <div className="wrap py-20 md:py-28">
-            <SectionHead index="04" label="Data, AI & automation" title={<>A small laboratory for <span className="font-mono text-[0.8em] tracking-tight text-moss">building</span> things, not only analysing them.</>} href="/lab" cta="Enter the lab" />
+            <SectionHead index="04" label="Data, AI & automation" title={<>A small laboratory for <em className="text-beige">building</em> things, not only analysing them.</>} href="/lab" cta="Enter the lab" />
             <div className="grid-swiss mt-14 gap-y-10">
               <Reveal className="col-span-4 md:col-span-8 lg:col-span-5">
-                <p className="font-mono text-xs text-moss">~/lab/{lab.slug} <span className="text-faint">— {lab.status}</span></p>
+                <p className="t-meta">{lab.context}</p>
                 <h3 className="t-headline mt-4 text-[clamp(2rem,3.4vw,3.2rem)]">{lab.title}</h3>
                 <p className="mt-4 max-w-[48ch] text-muted"><T>{lab.summary}</T></p>
-                <Link href={`/lab/${lab.slug}`} className="t-meta link-draw mt-6 inline-block text-text">Open project file →</Link>
+                <Link href={`/lab/${lab.slug}`} className="link-draw mt-6 inline-block text-text">Read the project →</Link>
               </Reveal>
               <Reveal delay={0.15} className="col-span-4 border hairline bg-ink/70 p-5 md:col-span-8 lg:col-span-6 lg:col-start-7">
-                <div className="t-meta mb-4 flex justify-between"><span>workflow.svg</span><span className="text-orange">illustrative</span></div>
+                <p className="t-meta mb-4 italic">An illustration of the process</p>
                 <MiniFlow steps={lab.workflow?.steps.map((s) => s.title) ?? []} />
               </Reveal>
             </div>
@@ -143,10 +143,9 @@ export default function Home() {
           {projects.map((p, i) => (
             <Reveal as="li" key={p.slug} delay={i * 0.06}>
               <Link href={`/work/projects/${p.slug}`} className="group grid-swiss items-baseline border-t hairline py-6 transition-colors hover:bg-ink-2">
-                <span className="col-span-1 font-mono text-xs text-orange">{pad(i + 1)}</span>
-                <span className="t-headline col-span-3 text-2xl md:col-span-4 md:text-3xl lg:col-span-5"><T>{p.title}</T></span>
-                <span className="t-meta col-span-4 col-start-2 mt-2 md:col-span-2 md:col-start-auto md:mt-0 lg:col-span-2">{p.kind}</span>
-                <span className="col-span-4 col-start-2 mt-2 text-sm text-muted md:col-span-7 md:col-start-2 lg:col-span-4 lg:col-start-auto lg:mt-0"><T>{p.summary}</T></span>
+                <span className="t-headline col-span-4 text-2xl md:col-span-5 md:text-3xl lg:col-span-5"><T>{p.title}</T></span>
+                <span className="t-meta col-span-4 mt-2 md:col-span-3 md:mt-0 lg:col-span-2">{p.kind}</span>
+                <span className="col-span-4 mt-2 text-sm text-muted md:col-span-8 lg:col-span-5 lg:mt-0"><T>{p.summary}</T></span>
               </Link>
             </Reveal>
           ))}
@@ -156,7 +155,7 @@ export default function Home() {
       {/* G — Contact */}
       <section className="wrap pt-28 md:pt-44" aria-label="Contact">
         <div className="grid-swiss border-t hairline pt-10">
-          <p className="t-eyebrow col-span-4 md:col-span-2"><span className="text-orange">07</span><span className="mx-2 text-faint">/</span>Contact</p>
+          <p className="t-eyebrow col-span-4 md:col-span-2">Contact</p>
           <div className="col-span-4 md:col-span-6 lg:col-span-9 lg:col-start-4">
             <p className="t-display text-[clamp(3.25rem,9vw,9.5rem)]">
               <SplitWords text="Let's talk." />

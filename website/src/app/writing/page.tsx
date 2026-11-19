@@ -16,7 +16,7 @@ export default function WritingIndex() {
   return (
     <div className="wrap pt-[calc(var(--nav-h)+4rem)] md:pt-[calc(var(--nav-h)+7rem)]">
       <header className="grid-swiss gap-y-8 pb-16 md:pb-24">
-        <p className="t-eyebrow col-span-4 md:col-span-8 lg:col-span-12"><span className="text-orange">02</span><span className="mx-2 text-faint">/</span>Writing & Research</p>
+        <p className="t-eyebrow col-span-4 md:col-span-8 lg:col-span-12">Writing & Research</p>
         <h1 className="t-display col-span-4 text-[clamp(3.5rem,9vw,9rem)] md:col-span-8 lg:col-span-9">
           <SplitWords text="An independent archive." />
         </h1>
