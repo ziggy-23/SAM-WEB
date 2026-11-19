@@ -18,10 +18,12 @@ export function Hero({ headline, subline, stops }: { headline: string; subline: 
 
   return (
     <section ref={ref} className="relative min-h-[100svh] overflow-hidden pt-[var(--nav-h)]" aria-labelledby="hero-title">
-      <motion.div style={{ y: globeY, opacity: fade }} className="pointer-events-none absolute right-[-30%] top-[22%] w-[130%] opacity-60 md:right-[-16%] md:top-[8%] md:w-[78%] md:opacity-100 lg:right-[-12%] lg:w-[60%]">
-        <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.8, ease: EASE }}>
-          <Globe stops={stops} />
-        </motion.div>
+      <motion.div style={{ y: globeY, opacity: fade }} className="pointer-events-none absolute right-[-45%] top-[30%] w-[135%] md:right-[-16%] md:top-[8%] md:w-[78%] lg:right-[-12%] lg:w-[60%]">
+        <div className="opacity-40 md:opacity-100">
+          <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.8, ease: EASE }}>
+            <Globe stops={stops} />
+          </motion.div>
+        </div>
       </motion.div>
 
       <motion.div style={{ y: textY }} className="wrap relative flex min-h-[calc(100svh-var(--nav-h))] flex-col justify-between pb-8 pt-10 md:pt-14">
@@ -30,7 +32,7 @@ export function Hero({ headline, subline, stops }: { headline: string; subline: 
           className="t-meta flex flex-wrap gap-x-6 gap-y-1"
         >
           <span>Personal archive</span>
-          <span className="text-faint">—</span>
+          <span className="hidden text-faint sm:inline">—</span>
           <span>{formatCoord(first.lat, first.lon)} <span className="text-orange">→</span> {formatCoord(last.lat, last.lon)}</span>
         </motion.div>
 
