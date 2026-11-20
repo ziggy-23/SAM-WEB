@@ -34,8 +34,9 @@ export function Callout({ title, children }: { title?: string; children: React.R
 }
 
 /** Small map: highlights countries by their Natural Earth name, e.g. "Lebanon". */
-export function RegionMap({ highlight = [], caption, center, scale }: { highlight?: string[]; caption?: string; center?: [number, number]; scale?: number }) {
-  const m = regionMap(highlight, { center, scale });
+/** `points` pins places (e.g. straits) with a hand-drawn ring and a handwritten label. */
+export function RegionMap({ highlight = [], caption, center, scale, points }: { highlight?: string[]; caption?: string; center?: [number, number]; scale?: number; points?: { label: string; lon: number; lat: number; dx?: number; dy?: number }[] }) {
+  const m = regionMap(highlight, { center, scale, points });
   return (
     <Reveal as="div">
       <figure>
@@ -43,6 +44,13 @@ export function RegionMap({ highlight = [], caption, center, scale }: { highligh
           <path d={m.graticule} fill="none" stroke="rgba(233,230,222,0.05)" />
           {m.shapes.map((s) => (
             <path key={s.name} d={s.d} fill={s.highlight ? "rgba(197,139,96,0.55)" : "#22231e"} stroke={s.highlight ? "#c58b60" : "rgba(233,230,222,0.14)"} strokeWidth={0.6} />
+          ))}
+          {m.points.map((p, i) => (
+            <g key={p.label}>
+              <ellipse cx={p.x} cy={p.y} rx={9} ry={7} fill="none" stroke="#c58b60" strokeWidth={1.3} transform={`rotate(-12 ${p.x} ${p.y})`} />
+              <circle cx={p.x} cy={p.y} r={1.8} fill="#c58b60" />
+              <text x={p.x + (points?.[i].dx ?? 12)} y={p.y + (points?.[i].dy ?? -10)} className="font-hand" fill="#e9e6de" fontSize={19}>{p.label}</text>
+            </g>
           ))}
         </svg>
         <figcaption className="t-meta mt-2">{caption ?? highlight.join(" · ")}</figcaption>

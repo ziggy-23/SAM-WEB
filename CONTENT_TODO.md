@@ -19,7 +19,8 @@ Run `npm run check-content` (inside `website/`) for a line-by-line list of every
 ## 🟠 P1: Makes the application noticeably stronger
 
 - [ ] **A second Lab project built on Elastic's own stack**: by far the biggest lever. For example: index a year of tenders in Elasticsearch and build a Kibana dashboard (by donor, region, topic, IN/REJECT rate), or use semantic search over terms of reference. Even a small, honest version shows initiative. *(Pick the angle once we know the exact role.)*
-- [ ] **First real article.** This brings back the Writing section. A short piece drawn from the Red Sea thesis is the quickest; a piece on data/AI in international development would bridge both worlds.
+- [ ] **Check the Iran article** (`content/articles/destroy-everything-change-nothing.mdx`): the English adaptation of "Tout détruire, rien changer". Verify the date (set to 20 Oct 2026), the wording of the quotes, the scorecard verdicts and the chart captions. Add your sources (Mearsheimer quote, oil-export estimates, the September missile reports) under `references:`.
+- [ ] **Second article.** A piece from the Red Sea thesis, or one on data/AI in international development, which would bridge both worlds.
 - [ ] **Homepage positioning statement**: the hero headline is still the original brief wording. One sharper sentence about who you are and what you do.
 - [ ] **Contact form**: create a Resend account, verify a domain, set the 3 environment variables (README §4). Until then the form tells visitors it isn't connected and shows your email.
 - [ ] **Custom domain** (e.g. `sam-mehfara.com`, ~€10–15/year), so the link in the CV looks like yours rather than `*.vercel.app`.
@@ -48,4 +49,5 @@ Run `npm run check-content` (inside `website/`) for a line-by-line list of every
 
 ## ✅ Done
 
+- First article published (Iran war, with scorecard, map, charts and scenarios) · homepage "About" section rebalanced (no empty space under the headline)
 - Contact email and LinkedIn · employment dates, titles, locations · education dates · Sciences Po dual degree, MFA title, GlobalCAD confirmed · portrait · "What I learned" for every role except BBC and for all three universities · Lab architecture and real workflow steps · public mode (nothing unfinished visible on the live site).

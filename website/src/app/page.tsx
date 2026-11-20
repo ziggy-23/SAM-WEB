@@ -33,24 +33,26 @@ export default function Home() {
       <section id="intro" className="wrap pt-24 md:pt-40" aria-label="A little about me">
         <SectionHead index="01" label="A little about me" href="/about" cta="Full biography" />
         <div className="grid-swiss mt-14 gap-y-12">
-          <p className="t-headline col-span-4 text-[clamp(1.75rem,3.3vw,3.4rem)] md:col-span-8 lg:col-span-8">
-            <SplitWords text={profile.shortIntro} stagger={0.018} />
-          </p>
-          <Reveal delay={0.2} className="col-span-4 md:col-span-4 lg:col-span-3 lg:col-start-10">
-            {profile.portrait && (
-              <div className="mb-10 w-2/3 md:w-full">
+          <div className="col-span-4 md:col-span-8 lg:col-span-8">
+            <p className="t-headline text-[clamp(1.75rem,3.3vw,3.4rem)]">
+              <SplitWords text={profile.shortIntro} stagger={0.018} />
+            </p>
+            <Reveal delay={0.3} className="mt-14 md:mt-20">
+              <p className="t-eyebrow mb-4">Areas of interest</p>
+              <ul className="grid grid-cols-1 border-t hairline sm:grid-cols-2 lg:grid-cols-3 sm:gap-x-[var(--gutter)]">
+                {profile.focusAreas.map((f) => (
+                  <li key={f} className="border-b hairline py-2.5 text-sm text-muted">{f}</li>
+                ))}
+              </ul>
+            </Reveal>
+          </div>
+          {profile.portrait && (
+            <Reveal delay={0.2} className="col-span-4 md:col-span-4 lg:col-span-3 lg:col-start-10 lg:self-center">
+              <div className="w-2/3 md:w-full">
                 <Portrait src={profile.portrait} alt={`Portrait of ${profile.fullName}`} sizes="(min-width:1024px) 25vw, (min-width:768px) 50vw, 66vw" />
               </div>
-            )}
-            <p className="t-eyebrow mb-4">Areas of interest</p>
-            <ul className="divide-y divide-line border-y hairline">
-              {profile.focusAreas.map((f, i) => (
-                <li key={f} className="flex items-baseline gap-3 py-2 text-sm text-muted">
-{f}
-                </li>
-              ))}
-            </ul>
-          </Reveal>
+            </Reveal>
+          )}
         </div>
       </section>
 

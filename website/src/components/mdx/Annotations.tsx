@@ -23,7 +23,11 @@ export function Scribble({ children, rotate = -2, inline = false }: { children: 
 }
 
 /** Builds a slightly irregular, hand-drawn path around a box of w × h pixels. */
-function handPath(kind: "underline" | "circle" | "box", w: number, h: number) {
+function handPath(kind: "underline" | "circle" | "box" | "strike", w: number, h: number) {
+  if (kind === "strike") {
+    const y = h * 0.55;
+    return `M-3 ${y + 2} C ${w * 0.3} ${y - 2}, ${w * 0.6} ${y + 3}, ${w + 4} ${y - 3}`;
+  }
   if (kind === "underline") {
     const y = h + 3;
     return `M-2 ${y} C ${w * 0.25} ${y - 3}, ${w * 0.5} ${y + 3}, ${w * 0.75} ${y - 1} S ${w + 2} ${y - 2}, ${w + 4} ${y}`;
@@ -38,7 +42,7 @@ function handPath(kind: "underline" | "circle" | "box", w: number, h: number) {
 }
 
 /** Marks words in the text with a drawn underline, circle or box. */
-export function Mark({ children, kind = "underline" }: { children: React.ReactNode; kind?: "underline" | "circle" | "box" }) {
+export function Mark({ children, kind = "underline" }: { children: React.ReactNode; kind?: "underline" | "circle" | "box" | "strike" }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-25% 0px -25% 0px" });
   const [size, setSize] = useState<[number, number] | null>(null);
@@ -55,7 +59,7 @@ export function Mark({ children, kind = "underline" }: { children: React.ReactNo
         <svg aria-hidden width={size[0]} height={size[1]} className="pointer-events-none absolute left-0 top-0 overflow-visible">
           <motion.path
             d={handPath(kind, size[0], size[1])}
-            fill="none" stroke="#c58b60" strokeWidth={kind === "underline" ? 2 : 1.5} strokeLinecap="round" strokeLinejoin="round"
+            fill="none" stroke="#c58b60" strokeWidth={kind === "underline" || kind === "strike" ? 2 : 1.5} strokeLinecap="round" strokeLinejoin="round"
             initial={{ pathLength: 0 }} animate={inView ? { pathLength: 1 } : undefined} transition={DRAW}
           />
         </svg>

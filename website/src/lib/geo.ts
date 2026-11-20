@@ -75,7 +75,10 @@ export function journeyMap(stops: { id: string; lat: number; lon: number }[]) {
 }
 
 /** Small regional map used inside articles: highlights the named countries. */
-export function regionMap(highlight: string[], opts: { center?: [number, number]; scale?: number } = {}) {
+export function regionMap(
+  highlight: string[],
+  opts: { center?: [number, number]; scale?: number; points?: { label: string; lon: number; lat: number }[] } = {},
+) {
   const width = 420, height = 300;
   const projection = geoConicConformal()
     .parallels([25, 45])
@@ -85,5 +88,9 @@ export function regionMap(highlight: string[], opts: { center?: [number, number]
     .translate([width / 2, height / 2])
     .clipExtent([[0, 0], [width, height]]);
   const base = project(projection, width, height, "50m", highlight);
-  return { width, height, shapes: base.shapes, graticule: base.graticule };
+  const points = (opts.points ?? []).map((p) => {
+    const [x, y] = projection([p.lon, p.lat])!;
+    return { label: p.label, x: +x.toFixed(1), y: +y.toFixed(1) };
+  });
+  return { width, height, shapes: base.shapes, graticule: base.graticule, points };
 }

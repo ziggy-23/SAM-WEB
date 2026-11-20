@@ -112,7 +112,7 @@ Components available in any `.mdx` file:
 | --- | --- |
 | `<Step aside={…}>` | A storytelling section with an optional margin element |
 | `<Lede>` | Large opening paragraph |
-| `<Mark kind="underline" \| "circle" \| "box">` | Hand-drawn mark around words |
+| `<Mark kind="underline" \| "circle" \| "box" \| "strike">` | Hand-drawn mark around words (keep it to a few words: marks don't wrap) |
 | `<Scribble>` | Handwritten marginal note (`inline` to place it in the text) |
 | `<Arrow direction="curve" \| "down" \| "left" \| "right" label="…">` | Hand-drawn arrow |
 | `<BarChart data={[…]} title unit source illustrative>` | Horizontal bar chart |
@@ -120,8 +120,11 @@ Components available in any `.mdx` file:
 | `<Flow steps={["A", "B", "C"]}>` | Vertical flow diagram |
 | `<Timeline items={[{ label, text }]}>` | Small vertical timeline |
 | `<Stat value="42%" label="…" source="…">` | Highlighted figure with drawn circle |
-| `<RegionMap highlight={["Lebanon", "Syria"]} caption="…">` | Small map (country names as in Natural Earth) |
+| `<RegionMap highlight={["Lebanon", "Syria"]} points={[{ label, lon, lat }]} center={[lon, lat]} scale caption="…">` | Small map (country names as in Natural Earth); `points` pins places with a drawn ring |
 | `<Callout title="…">` | Boxed aside |
+| `<Scorecard title items={[{ goal, verdict: "no" \| "partial" \| "yes", note }]} source>` | Objectives ticked or crossed out by hand |
+| `<Scenarios title items={[{ label, text, likely }]}>` | Possible outcomes; the `likely` one is circled |
+| `<PullQuote by="…">` | Large quotation in the margin |
 | `<Figure src="graphics/chart.png" alt="…" caption="…" source="…">` | Image from `assets/` |
 | `<TODO>…</TODO>` | A visible placeholder |
 
