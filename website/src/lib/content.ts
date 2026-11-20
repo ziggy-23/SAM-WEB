@@ -10,6 +10,7 @@ import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
 import { z } from "zod";
+import { PUBLIC, isPlaceholder } from "./utils";
 
 export const CONTENT_DIR = path.join(process.cwd(), "..", "content");
 const isProd = process.env.NODE_ENV === "production";
@@ -24,6 +25,11 @@ function readJson<T>(rel: string, schema: z.ZodType<T>): T {
   return parsed.data;
 }
 
+/** Public mode: drop <TODO> blocks, and a heading left with nothing under it but a TODO. */
+function stripTodos(body: string) {
+  return body.replace(/(^#{1,6}[^\n]*\n\s*)?<TODO>[\s\S]*?<\/TODO>/gm, "").replace(/\n{3,}/g, "\n\n").trim();
+}
+
 function readMdxDir<T>(dir: string, schema: z.ZodType<T>) {
   const full = path.join(CONTENT_DIR, dir);
   if (!fs.existsSync(full)) return [] as { slug: string; data: T; body: string }[];
@@ -36,7 +42,7 @@ function readMdxDir<T>(dir: string, schema: z.ZodType<T>) {
       if (!parsed.success) {
         throw new Error(`Invalid frontmatter in content/${dir}/${f}:\n${z.prettifyError(parsed.error)}`);
       }
-      return { slug: f.replace(/\.mdx?$/, ""), data: parsed.data, body: content };
+      return { slug: f.replace(/\.mdx?$/, ""), data: parsed.data, body: PUBLIC ? stripTodos(content) : content };
     });
 }
 
@@ -50,7 +56,11 @@ const SiteSchema = z.object({
     links: z.array(z.object({ label: z.string(), url: z.string(), kind: z.string().optional() })),
   }),
 });
-export const getSite = () => readJson("site.json", SiteSchema);
+export const getSite = () => {
+  const site = readJson("site.json", SiteSchema);
+  if (PUBLIC) site.contact.links = site.contact.links.filter((l) => !isPlaceholder(l.url));
+  return site;
+};
 
 /* ------------------------------------------------------------- biography */
 
@@ -72,7 +82,22 @@ const ProfileSchema = z.object({
   portrait: z.string().nullable(),
 });
 export type Profile = z.infer<typeof ProfileSchema>;
-export const getProfile = () => readJson("biography/profile.json", ProfileSchema);
+export const getProfile = (): Profile => {
+  const profile = readJson("biography/profile.json", ProfileSchema);
+  if (!PUBLIC) return profile;
+  // Never link to a page or section that is hidden because it has no content yet.
+  const sections = getSections();
+  const pages = new Set(getInterestPages().map((p) => `/interests/${p.slug}`));
+  const reachable = (href: string) =>
+    href.startsWith("/interests/") ? pages.has(href)
+    : href.startsWith("/writing") ? sections.writing
+    : href.startsWith("/photography") ? sections.photography
+    : true;
+  return {
+    ...profile,
+    interests: profile.interests.map((i) => (i.href && !reachable(i.href) ? { ...i, href: undefined, linkLabel: undefined } : i)),
+  };
+};
 
 const StopSchema = z.object({
   id: z.string(),
@@ -119,7 +144,7 @@ const ExperienceSchema = z.object({
   highlights: z.array(z.object({ value: z.string(), label: z.string() })).default([]),
   relatedProjects: z.array(z.string()).default([]),
   partners: z.array(z.string()).default([]),
-  listen: z.string().optional(),
+  listen: z.string().optional().transform((v) => (PUBLIC && isPlaceholder(v) ? undefined : v)),
   media: z.array(z.object({ src: z.string(), caption: z.string().optional() })).default([]),
 });
 export type Experience = z.infer<typeof ExperienceSchema> & { slug: string; body: string };
@@ -231,6 +256,7 @@ export function getWritings({ includeDrafts = !isProd } = {}): Writing[] {
   );
   return all
     .filter((w) => includeDrafts || !w.draft)
+    .filter((w) => !(PUBLIC && w.demo))
     .sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 export const getWriting = (slug: string) => getWritings().find((w) => w.slug === slug);
@@ -262,7 +288,8 @@ const ReadingSchema = z.object({
   ),
 });
 export type Recommendation = z.infer<typeof ReadingSchema>["items"][number];
-export const getReadingList = () => readJson("reading-list/recommendations.json", ReadingSchema).items;
+export const getReadingList = () =>
+  readJson("reading-list/recommendations.json", ReadingSchema).items.filter((r) => !(PUBLIC && r.template));
 
 /* ----------------------------------------------------------- photography */
 
@@ -287,7 +314,8 @@ const CollectionSchema = z.object({
   intro: z.string().optional(),
 });
 export type Collection = z.infer<typeof CollectionSchema>;
-export const getPhotos = () => readJson("photography/photos.json", z.object({ photos: z.array(PhotoSchema) })).photos;
+export const getPhotos = () =>
+  readJson("photography/photos.json", z.object({ photos: z.array(PhotoSchema) })).photos.filter((p) => !(PUBLIC && !p.src));
 export const getCollections = () =>
   readJson("photography/collections.json", z.object({ collections: z.array(CollectionSchema) })).collections;
 
@@ -296,5 +324,23 @@ export const getCollections = () =>
 const InterestPageSchema = z.object({ title: z.string(), icon: z.string().optional(), lede: z.string().optional() });
 export type InterestPage = z.infer<typeof InterestPageSchema> & { slug: string; body: string };
 export const getInterestPages = (): InterestPage[] =>
-  readMdxDir("interests", InterestPageSchema).map((e) => ({ ...e.data, slug: e.slug, body: e.body }));
+  readMdxDir("interests", InterestPageSchema)
+    .map((e) => ({ ...e.data, slug: e.slug, body: e.body }))
+    .filter((p) => !(PUBLIC && !p.body.trim())); // unwritten pages stay hidden on the live site
+
+/* ------------------------------------------------- which sections have content */
+
+/** A section with nothing real in it is left out of the navigation, homepage, sitemap and links. */
+export const getSections = () => ({
+  writing: getWritings().length > 0 || getReadingList().length > 0,
+  articles: getWritings().length > 0,
+  reading: getReadingList().length > 0,
+  photography: getPhotos().length > 0,
+});
+
+/** Navigation hrefs to hide because their section is empty. */
+export const getHiddenNav = () => {
+  const s = getSections();
+  return [!s.writing && "/writing", !s.photography && "/photography"].filter(Boolean) as string[];
+};
 export const getInterestPage = (slug: string) => getInterestPages().find((p) => p.slug === slug);

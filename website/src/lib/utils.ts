@@ -1,3 +1,11 @@
+/**
+ * Public mode: the production build hides anything unfinished (placeholder chips, template
+ * entries, placeholder photographs, empty pages and the sections that would be left empty).
+ * In `npm run dev` everything stays visible. Set NEXT_PUBLIC_SHOW_PLACEHOLDERS=1 to preview
+ * a production build with placeholders shown.
+ */
+export const PUBLIC = process.env.NODE_ENV === "production" && process.env.NEXT_PUBLIC_SHOW_PLACEHOLDERS !== "1";
+
 /** Matches "[ADD …]", "[VERIFY …]", "[TO VERIFY]" style placeholders in content. */
 export const PLACEHOLDER_RE = /\[(?:ADD|VERIFY|TO VERIFY|PLACEHOLDER)[^\]]*\]/g;
 

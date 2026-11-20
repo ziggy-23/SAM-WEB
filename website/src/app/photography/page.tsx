@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { getCollections, getPhotos } from "@/lib/content";
+import { notFound } from "next/navigation";
+import { getCollections, getPhotos, getSections } from "@/lib/content";
 import { Gallery } from "@/components/photography/Gallery";
 import { SplitWords, Reveal } from "@/components/motion/Reveal";
 
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default function Photography() {
+  if (!getSections().photography) notFound();
   const photos = getPhotos();
   const placeholders = photos.filter((p) => !p.src).length;
   return (

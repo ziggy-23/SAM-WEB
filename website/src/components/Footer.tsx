@@ -1,12 +1,13 @@
 import Link from "next/link";
 import { NAV } from "@/lib/nav";
-import { getSite } from "@/lib/content";
+import { getHiddenNav, getSite } from "@/lib/content";
 import { isPlaceholder } from "@/lib/utils";
 
 export function Footer() {
   const site = getSite();
   const links = site.contact.links.filter((l) => !isPlaceholder(l.url));
   const year = new Date().getFullYear();
+  const hidden = getHiddenNav();
   return (
     <footer className="mt-32 border-t hairline">
       <div className="wrap grid-swiss gap-y-10 py-14">
@@ -17,7 +18,7 @@ export function Footer() {
         <nav aria-label="Footer" className="col-span-2 md:col-span-2 lg:col-start-7">
           <p className="t-eyebrow mb-4">Index</p>
           <ul className="space-y-1.5 text-sm">
-            {NAV.map((n) => (
+            {NAV.filter((n) => !hidden.includes(n.href)).map((n) => (
               <li key={n.href}><Link className="link-draw text-muted hover:text-text" href={n.href}>{n.label}</Link></li>
             ))}
           </ul>

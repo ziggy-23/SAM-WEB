@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getReadingList } from "@/lib/content";
 import { SplitWords, Reveal } from "@/components/motion/Reveal";
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
 
 export default function Reading() {
   const items = getReadingList();
+  if (items.length === 0) notFound();
   return (
     <div className="wrap pt-[calc(var(--nav-h)+4rem)] md:pt-[calc(var(--nav-h)+7rem)]">
       <nav className="t-meta" aria-label="Breadcrumb"><Link href="/writing" className="link-draw">Writing & Research</Link><span className="mx-2 text-faint">/</span>Reading list</nav>

@@ -5,7 +5,7 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { GridOverlay } from "@/components/GridOverlay";
 import { MotionProvider } from "@/components/motion/MotionProvider";
-import { getSite } from "@/lib/content";
+import { getHiddenNav, getSite } from "@/lib/content";
 import { SITE_URL } from "@/lib/utils";
 
 const serif = Newsreader({ subsets: ["latin"], variable: "--font-newsreader", style: ["normal", "italic"], axes: ["opsz"], display: "swap" });
@@ -36,7 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         <MotionProvider>
-          <Nav />
+          <Nav hidden={getHiddenNav()} />
           <main id="main">{children}</main>
           <Footer />
           <GridOverlay />

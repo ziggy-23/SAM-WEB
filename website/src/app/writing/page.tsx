@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import Link from "next/link";
-import { getTaxonomy, getWritings } from "@/lib/content";
+import { getSections, getTaxonomy, getWritings } from "@/lib/content";
 import { Archive } from "@/components/writing/Archive";
 import { SplitWords, Reveal } from "@/components/motion/Reveal";
 
@@ -11,6 +12,8 @@ export const metadata: Metadata = {
 };
 
 export default function WritingIndex() {
+  const sections = getSections();
+  if (!sections.writing) notFound();
   const tax = getTaxonomy();
   const items = getWritings().map(({ body, references, related, ...w }) => ({ ...w, subtitle: w.subtitle ?? "" }));
   return (
@@ -22,7 +25,7 @@ export default function WritingIndex() {
         </h1>
         <Reveal delay={0.3} className="col-span-4 self-end md:col-span-5 lg:col-span-3">
           <p className="text-muted">Original articles, geopolitical analysis and academic work on international relations and political economy — written to be read, not merely filed.</p>
-          <Link href="/writing/reading" className="t-meta link-draw mt-5 inline-block text-text">The reading list — pieces by others →</Link>
+          {sections.reading && <Link href="/writing/reading" className="t-meta link-draw mt-5 inline-block text-text">The reading list — pieces by others →</Link>}
         </Reveal>
       </header>
       <Archive items={items} categories={tax.categories} types={tax.types} />

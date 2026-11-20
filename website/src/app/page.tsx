@@ -9,7 +9,7 @@ import { Portrait } from "@/components/Portrait";
 import { T } from "@/components/Text";
 import { JsonLd, personLd } from "@/components/JsonLd";
 import {
-  getExperiences, getJourney, getLabProjects, getPhotos, getProfile, getProjects, getWritings, getTaxonomy,
+  getExperiences, getJourney, getLabProjects, getPhotos, getProfile, getProjects, getSections, getWritings, getTaxonomy,
 } from "@/lib/content";
 import { formatDate } from "@/lib/utils";
 
@@ -22,6 +22,7 @@ export default function Home() {
   const lab = getLabProjects()[0];
   const photos = getPhotos();
   const projects = getProjects().slice(0, 4);
+  const sections = getSections();
 
   return (
     <>
@@ -62,6 +63,7 @@ export default function Home() {
       </section>
 
       {/* C — Writing */}
+      {sections.articles && (
       <section className="wrap pt-24 md:pt-36" aria-label="Latest writing">
         <SectionHead index="03" label="Writing & research" title="Notes on power, money and the systems in between." href="/writing" cta="The archive" />
         <div className="mt-12 grid-swiss gap-y-10">
@@ -93,12 +95,13 @@ export default function Home() {
               <p className="mt-3 text-sm text-muted">Academic work, policy briefs and a reading list of external pieces worth your time.</p>
               <div className="mt-4 flex gap-6 text-sm">
                 <Link href="/writing?type=research" className="link-draw">Research →</Link>
-                <Link href="/writing/reading" className="link-draw">Reading list →</Link>
+                {sections.reading && <Link href="/writing/reading" className="link-draw">Reading list →</Link>}
               </div>
             </Reveal>
           </div>
         </div>
       </section>
+      )}
 
       {/* D — Lab */}
       {lab && (
@@ -122,6 +125,7 @@ export default function Home() {
       )}
 
       {/* E — Photography */}
+      {sections.photography && (
       <section className="bg-void pb-28 pt-24 md:pb-40 md:pt-36" aria-label="Photography">
         <div className="wrap">
           <SectionHead index="05" label="Photography" title={<span className="italic">Things seen along the way.</span>} href="/photography" cta="Enter the archive" />
@@ -129,12 +133,15 @@ export default function Home() {
             {photos[0] && <Reveal className="col-span-12 md:col-span-8"><PhotoFrame photo={photos[0]} sizes="(min-width: 768px) 66vw, 100vw" /></Reveal>}
             {photos[1] && <Reveal delay={0.15} className="col-span-7 col-start-6 -mt-16 md:col-span-3 md:col-start-10 md:mt-32"><PhotoFrame photo={photos[1]} sizes="25vw" /></Reveal>}
             {photos[3] && <Reveal delay={0.1} className="col-span-6 md:col-span-3 md:col-start-3 md:-mt-24"><PhotoFrame photo={photos[3]} sizes="25vw" /></Reveal>}
-            <Reveal delay={0.2} className="col-span-12 self-end md:col-span-4 md:col-start-7">
-              <p className="t-hand text-2xl -rotate-2">placeholder frames — real photographs coming</p>
-            </Reveal>
+            {photos.some((p) => !p.src) && (
+              <Reveal delay={0.2} className="col-span-12 self-end md:col-span-4 md:col-start-7">
+                <p className="t-hand text-2xl -rotate-2">placeholder frames — real photographs coming</p>
+              </Reveal>
+            )}
           </div>
         </div>
       </section>
+      )}
 
       {/* F — Projects */}
       <section className="wrap pt-24 md:pt-36" aria-label="Selected projects">

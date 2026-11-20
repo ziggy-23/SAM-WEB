@@ -13,7 +13,8 @@ export function Wordmark({ className = "" }: { className?: string }) {
   );
 }
 
-export function Nav() {
+export function Nav({ hidden: hiddenNav = [] }: { hidden?: string[] }) {
+  const items = NAV.filter((n) => !hiddenNav.includes(n.href));
   const pathname = usePathname();
   const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -73,7 +74,7 @@ export function Nav() {
           </Link>
 
           <ul className="hidden items-center gap-1 md:flex">
-            {NAV.map((item) => {
+            {items.map((item) => {
               const active = isActive(item.href);
               return (
                 <li key={item.href}>
@@ -129,7 +130,7 @@ export function Nav() {
             transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
           >
             <ul className="wrap mt-8 flex flex-1 flex-col">
-              {[{ href: "/", label: "Home", index: "00" }, ...NAV].map((item, i) => (
+              {[{ href: "/", label: "Home", index: "00" }, ...items].map((item, i) => (
                 <motion.li
                   key={item.href}
                   initial={{ opacity: 0, y: 24 }}

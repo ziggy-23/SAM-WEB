@@ -6,7 +6,7 @@ status: "In use"
 verified: true
 order: 1
 year: "2026"
-tools: ["Generative AI", "Excel (Power Query)"]
+tools: ["Claude (custom skills)", "Web search", "Excel (Power Query)"]
 relatedExperience: "globalcad"
 problem: "Every week, many public tenders and terms of reference arrive from EU, UN and national donors. Reading each one against technical, financial and eligibility criteria by hand is slow and hard to keep consistent."
 why: "To give the weekly commercial meeting a faster, more consistent basis for bid/no-bid decisions — and free time for the analysis that actually needs a person."
@@ -19,17 +19,13 @@ metrics:
 workflow:
   illustrative: true
   steps:
-    - { title: "Intake", text: "Tenders and terms of reference from EU, UN and national donors are collected and tracked." }
-    - { title: "Extraction", text: "Requirements are extracted from the tender documents." }
-    - { title: "AI-assisted screening", text: "Opportunities are checked against technical, financial and eligibility criteria with AI assistance." }
-    - { title: "Analyst review", text: "I review the results and structure a bid/no-bid recommendation." }
-    - { title: "Commercial meeting", text: "Recommendations are presented to management at the weekly commercial meeting." }
+    - { title: "Search", text: "Each week, new calls are pulled from development-finance portals (Devex, ReliefWeb, UNGM and national procurement sites) with a fixed set of queries." }
+    - { title: "Title filter", text: "A fast first pass classifies every opportunity from its title alone, so only promising terms of reference are downloaded and read." }
+    - { title: "ToR screening", text: "Each terms of reference is checked against hard disqualifiers and two decision tests, then labelled IN, CONDITIONAL or REJECT, with a short description and the main risks." }
+    - { title: "Analyst review", text: "I check every label and the reasoning behind it before anything reaches the shortlist." }
+    - { title: "Commercial meeting", text: "The shortlist goes into the tracker the team already uses. Management's bid/no-bid decisions are fed back to recalibrate the next week's screening." }
 media: []
 ---
-
-## The problem
-
-Public tenders and terms of reference arrive from many donors in different formats. Screening them meant reading long documents, pulling out requirements, and checking each one against technical, financial and eligibility criteria — slow work that was hard to keep consistent from week to week.
 
 ## What I built
 
@@ -37,7 +33,16 @@ I systematised the screening into a repeatable workflow: reading tender document
 
 ## Architecture
 
-<TODO>OPTIONAL — DESCRIBE THE TOOLS, PROMPTS AND DATA SOURCES YOU'RE COMFORTABLE SHARING PUBLICLY</TODO>
+The workflow is a chain of small, single-purpose AI skills rather than one large prompt. Each does one job and produces something a person can check:
+
+- **Search.** A weekly scan of development-finance portals with a fixed set of queries, limited to the last seven days.
+- **Title filter.** A cheap first pass that sorts dozens of opportunities by title alone and produces a download queue, so the expensive reading only happens where it is worth it.
+- **ToR screening.** The full terms of reference are tested against the firm's hard disqualifiers, a *consultancy or implementation?* test and a *core share* test. The output is a label (IN, CONDITIONAL or REJECT), a short description and the main risks. The skill is told never to invent missing information: if the document doesn't say, the answer is "not specified".
+- **Formatting.** The result is written straight into the 15-column tracker the commercial meeting already uses, so nobody has to learn a new tool.
+
+**The feedback loop.** Every week, the board's real decisions and comments are added to a calibration log that the screening skills read before deciding. The system learns how the team actually reasons, not just what the written rules say.
+
+The firm's own criteria and client data stay private. This page describes the design, not the contents.
 
 ## Results
 

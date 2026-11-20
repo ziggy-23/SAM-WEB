@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { PLACEHOLDER_RE } from "@/lib/utils";
+import { PLACEHOLDER_RE, PUBLIC } from "@/lib/utils";
 
 /**
  * Renders a content string, turning any "[ADD …]" / "[VERIFY …]" placeholder
@@ -7,6 +7,10 @@ import { PLACEHOLDER_RE } from "@/lib/utils";
  */
 export function T({ children }: { children?: string | null }) {
   if (!children) return null;
+  if (PUBLIC) {
+    const clean = children.replace(new RegExp(PLACEHOLDER_RE.source, "g"), "").replace(/\s{2,}/g, " ").trim();
+    return clean ? <>{clean}</> : null;
+  }
   const parts: React.ReactNode[] = [];
   let last = 0;
   for (const m of children.matchAll(new RegExp(PLACEHOLDER_RE.source, "g"))) {
@@ -24,6 +28,7 @@ export function T({ children }: { children?: string | null }) {
 
 /** For use inside MDX: <TODO>ADD SOMETHING</TODO> */
 export function Todo({ children }: { children?: React.ReactNode }) {
+  if (PUBLIC) return null;
   return (
     <span className="placeholder-chip" title="Placeholder — content to be added or verified">
       {children}

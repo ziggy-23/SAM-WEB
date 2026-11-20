@@ -66,7 +66,9 @@ Tip: press **G** on any page to show the 12-column grid the layout is built on.
 ## 3. Adding and editing content
 
 ### Placeholders
-Anything not yet verified is written as `[ADD …]`, `[VERIFY …]` or `<TODO>…</TODO>`. The site displays these as dashed orange labels so nothing unverified is ever mistaken for fact. Replace them with real text and they disappear. `npm run check-content` lists them all.
+Anything not yet verified is written as `[ADD …]`, `[VERIFY …]` or `<TODO>…</TODO>`. While you work (`npm run dev`) the site displays these as dashed orange labels so nothing unverified is ever mistaken for fact. Replace them with real text and they disappear. `npm run check-content` lists them all.
+
+**On the live site (production build) placeholders are hidden automatically.** Placeholder labels are removed (a heading with nothing under it but a `<TODO>` goes too). Template reading-list entries, placeholder photographs, demonstration articles and unwritten "My takes on…" pages are left out. A section with nothing real in it (Writing, Photography) disappears from the navigation, homepage, footer, sitemap and links, and its URL returns 404. Each comes back by itself once it has real content. To preview a production build with placeholders visible, build with `NEXT_PUBLIC_SHOW_PLACEHOLDERS=1`.
 
 ### Write an article
 1. Create `content/articles/my-article-title.mdx` (the file name becomes the URL: `/writing/my-article-title`).
